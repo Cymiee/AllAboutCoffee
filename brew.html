@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+  <script src="brew-game.js" defer></script>
+  <title>Brew Your Own | All About Coffee</title>
+</head>
+<body>
+  <header class="top-nav">
+    <a class="brand" href="index.html">☕ All About Coffee</a>
+    <nav class="nav-links">
+      <a href="beans.html">Beans</a>
+      <a href="drinks.html">Coffee Drinks</a>
+      <a href="brewing.html">Brewing</a>
+      <a href="brew.html">Brew Your Own</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 style="font-family: var(--font-heading); margin: 1.2rem 0 0.4rem;">Brew Your Own Coffee</h1>
+    <p style="max-width: 72ch; color: rgba(31,26,22,0.78); margin-top: 0;">
+      Add ingredients and the site will guess what drink you made. Think in “parts”:
+      1 espresso shot is a part, water/milk/foam add volume and change the style.
+    </p>
+
+    <div class="brew-wrap">
+      <section class="card">
+        <h2 style="margin:0 0 0.6rem;">Ingredients</h2>
+
+        <div class="controls" id="controls"></div>
+
+        <div class="cta-row" style="margin-top: 1rem;">
+          <button class="button" id="btnIdentify" type="button">Identify my drink</button>
+          <button class="button secondary" id="btnReset" type="button">Reset</button>
+        </div>
+      </section>
+
+      <aside class="card readout">
+        <p class="big" id="drinkName">—</p>
+        <p class="mini" id="drinkDesc">Build a drink, then click identify.</p>
+
+        <div>
+          <p class="mini" style="margin-bottom: 0.35rem;">Confidence</p>
+          <div class="meter"><div id="confidenceBar"></div></div>
+        </div>
+
+        <div class="card" style="padding: 0.95rem; box-shadow: none;">
+          <p class="mini" style="margin:0 0 0.35rem;"><strong>Your mix</strong></p>
+          <p class="mini" id="mixSummary" style="margin:0;">—</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">This is a simple classifier — cafés vary on recipes, so think “approximate”.</div>
+  </footer>
+</body>
+</html>
