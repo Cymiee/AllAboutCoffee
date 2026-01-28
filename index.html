@@ -8,64 +8,196 @@
   <title>All About Coffee</title>
 </head>
 <body>
-  <header class="top-nav">
-    <a class="brand" href="index.html">☕ All About Coffee</a>
-    <nav class="nav-links">
-      <a href="beans.html">Beans</a>
-      <a href="drinks.html">Coffee Drinks</a>
-      <a href="brewing.html">Brewing</a>
-      <a href="brew.html">Brew Your Own</a>
-    </nav>
-  </header>
+<header class="top-nav">
+  <a class="brand" href="index.html#top">☕ All About Coffee</a>
+  <nav class="nav-links">
+    <a href="index.html#beans">Beans</a>
+    <a href="index.html#drinks">Drinks</a>
+    <a href="index.html#brewing">Brewing</a>
+    <a href="index.html#glossary">Glossary</a>
+    <a class="game-link" href="brew.html">Brew Your Own</a>
+  </nav>
+</header>
 
-  <section class="hero">
-    <div class="hero-inner">
-      <h1>Learn coffee like a barista.</h1>
-      <p>
-        Coffee is a whole world: bean varieties, roast levels, extraction, and classic drinks.
-        This site explains the basics in a clean, beginner-friendly way — then lets you
-        play a mini game where you build a drink and the site tells you what you made.
+  <section id="top" class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+
+    <div class="container hero-inner reveal">
+      <p class="eyebrow">Coffee 101</p>
+      <h1>Learn coffee like a barista (without the stress).</h1>
+      <p class="lead">
+        Scroll for beans, drinks, and brewing basics. Then try the <strong>Brew Your Own</strong>
+        mini game to see what drink your recipe matches.
       </p>
 
       <div class="cta-row">
-        <a class="button" href="brew.html">Play Brew Your Own</a>
-        <a class="button secondary" href="beans.html">Start with beans</a>
+        <a class="button" href="#beans">Start learning ↓</a>
+        <a class="button secondary" href="brew.html">Play Brew Your Own →</a>
       </div>
     </div>
   </section>
 
-  <main class="container">
-    <div class="grid">
-      <article class="card col-4">
-        <h2>Beans</h2>
-        <p>Arabica vs Robusta, origins, processing methods, and how flavor changes.</p>
-      </article>
+  <main data-page="home">
+    <!-- BEANS -->
+    <section id="beans" class="section section--alt">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Beans & Origins</h2>
+          <p>Most coffee comes from two species. Where it’s grown + how it’s processed shapes flavor.</p>
+        </div>
 
-      <article class="card col-4">
-        <h2>Drinks</h2>
-        <p>Espresso-based classics like latte, cappuccino, americano, flat white, and more.</p>
-      </article>
+        <div class="grid">
+          <article class="card reveal">
+            <span class="chip">Arabica</span>
+            <h3>Sweet + complex</h3>
+            <p>Often fruity, floral, chocolatey. Typically higher acidity and aroma.</p>
+            <ul>
+              <li>Common at higher altitudes</li>
+              <li>More delicate plant</li>
+              <li>Often “specialty coffee” focused</li>
+            </ul>
+          </article>
 
-      <article class="card col-4">
-        <h2>Brewing</h2>
-        <p>Grind size, ratios, extraction, and methods like V60, French press, and espresso.</p>
-      </article>
+          <article class="card reveal">
+            <span class="chip">Robusta</span>
+            <h3>Stronger + more caffeine</h3>
+            <p>More bitter, heavier body, great crema—often used in espresso blends.</p>
+            <ul>
+              <li>Hardier plant</li>
+              <li>Higher caffeine</li>
+              <li>Nutty / woody / dark chocolate notes</li>
+            </ul>
+          </article>
 
-      <article class="card col-12">
-        <h2>Quick vocabulary</h2>
-        <ul class="list">
-          <li><strong>Extraction</strong>: how much flavor you pull out of the grounds.</li>
-          <li><strong>Ratio</strong>: coffee mass to water mass (example: 1:16 for filter coffee).</li>
-          <li><strong>Crema</strong>: foam-like layer on espresso from emulsified oils + CO₂.</li>
-          <li><strong>Body</strong>: mouthfeel — light/tea-like vs heavy/syrupy.</li>
-        </ul>
-      </article>
-    </div>
+          <article class="card full reveal">
+            <span class="chip">Processing</span>
+            <h3>How the fruit is removed changes taste</h3>
+            <ul>
+              <li><strong>Washed</strong>: clean, crisp, bright</li>
+              <li><strong>Natural</strong>: fruit-forward, sweet, sometimes funky</li>
+              <li><strong>Honey</strong>: syrupy sweetness + clarity</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DRINKS -->
+    <section id="drinks" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Classic Coffee Drinks</h2>
+          <p>Most café drinks are espresso + water + milk (and sometimes foam/chocolate). Ratios vary by café.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card small reveal">
+            <h3>Espresso</h3>
+            <p>Concentrated shot with crema. Strong, small, intense.</p>
+          </article>
+
+          <article class="card small reveal">
+            <h3>Americano</h3>
+            <p>Espresso + hot water. Similar strength to filter coffee, different texture.</p>
+          </article>
+
+          <article class="card small reveal">
+            <h3>Latte</h3>
+            <p>Espresso + lots of steamed milk + thin foam cap.</p>
+          </article>
+
+          <article class="card small reveal">
+            <h3>Cappuccino</h3>
+            <p>Espresso + milk + more foam (airier feel).</p>
+          </article>
+
+          <article class="card small reveal">
+            <h3>Flat White</h3>
+            <p>Espresso-forward milk drink with very thin microfoam.</p>
+          </article>
+
+          <article class="card small reveal">
+            <h3>Mocha</h3>
+            <p>Latte + chocolate. Dessert-y and rich.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- BREWING -->
+    <section id="brewing" class="section section--alt">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Brewing Basics</h2>
+          <p>Great coffee is mostly: grind size, ratio, water temp, and time. Change one variable at a time.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card reveal">
+            <h3>Ratios (starting points)</h3>
+            <ul>
+              <li>Filter: <strong>1:15</strong> to <strong>1:17</strong> (coffee:water)</li>
+              <li>French press: <strong>1:12</strong> to <strong>1:15</strong></li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <h3>Water temperature</h3>
+            <ul>
+              <li>Most brews: ~92–96°C</li>
+              <li>Darker roasts: slightly cooler can reduce bitterness</li>
+            </ul>
+          </article>
+
+          <article class="card full reveal">
+            <h3>Methods (what they emphasize)</h3>
+            <ul>
+              <li><strong>Pour-over</strong>: clarity, bright notes</li>
+              <li><strong>French press</strong>: heavier body, more oils</li>
+              <li><strong>AeroPress</strong>: flexible, can go strong or clean</li>
+              <li><strong>Espresso</strong>: intense, textured, concentrated</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- GLOSSARY -->
+    <section id="glossary" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Glossary</h2>
+          <p>Quick words you’ll see on bags and menus.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card reveal">
+            <h3>Extraction</h3>
+            <p>How much flavor you pull out of the grounds. Sour = under, bitter = over.</p>
+          </article>
+
+          <article class="card reveal">
+            <h3>Body</h3>
+            <p>Mouthfeel. Light/tea-like vs heavy/syrupy.</p>
+          </article>
+
+          <article class="card reveal">
+            <h3>Crema</h3>
+            <p>The foamy top on espresso—emulsified oils + gases.</p>
+          </article>
+
+          <article class="card reveal">
+            <h3>Bloom</h3>
+            <p>In pour-over, the first pour that releases CO₂ (helps even extraction).</p>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
     <div class="container">
-      Built for learning — simple explanations, real coffee logic.
+      Want to test your knowledge? Try <a href="brew.html"><strong>Brew Your Own</strong></a>.
     </div>
   </footer>
 </body>
