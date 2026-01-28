@@ -4,32 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles.css" />
-  <script src="app.js" defer></script>
+  <script src="main.js" defer></script>
   <script src="brew-game.js" defer></script>
   <title>Brew Your Own | All About Coffee</title>
 </head>
 <body>
   <header class="top-nav">
-    <a class="brand" href="index.html">☕ All About Coffee</a>
+    <a class="brand" href="index.html#top">☕ All About Coffee</a>
     <nav class="nav-links">
-      <a href="beans.html">Beans</a>
-      <a href="drinks.html">Coffee Drinks</a>
-      <a href="brewing.html">Brewing</a>
-      <a href="brew.html">Brew Your Own</a>
+      <a href="index.html#beans">Beans</a>
+      <a href="index.html#drinks">Coffee Drinks</a>
+      <a href="index.html#brewing">Brewing</a>
+      <a class="game-link" href="brew.html">Brew Your Own</a>
     </nav>
   </header>
 
-  <main class="container">
-    <h1 style="font-family: var(--font-heading); margin: 1.2rem 0 0.4rem;">Brew Your Own Coffee</h1>
-    <p style="max-width: 72ch; color: rgba(31,26,22,0.78); margin-top: 0;">
+  <main class="container" style="padding: 2rem 0 3.5rem;">
+    <h1 style="font-family: var(--font-heading); margin: 0 0 0.6rem; color: var(--coffee-900);">
+      Brew Your Own Coffee
+    </h1>
+    <p style="max-width: 80ch; margin: 0 0 1.4rem; color: var(--muted);">
       Add ingredients and the site will guess what drink you made. Think in “parts”:
-      1 espresso shot is a part, water/milk/foam add volume and change the style.
+      1 espresso shot is a part; water/milk/foam add volume and change the style.
     </p>
 
+    <!-- ✅ THIS WRAPPER IS WHAT MAKES IT 2-COLUMN -->
     <div class="brew-wrap">
+      <!-- Left: Controls -->
       <section class="card">
-        <h2 style="margin:0 0 0.6rem;">Ingredients</h2>
+        <h2 style="font-family: var(--font-heading); margin: 0 0 0.8rem; color: var(--coffee-900);">
+          Ingredients
+        </h2>
 
+        <!-- ✅ JS RENDERS CONTROLS INTO THIS DIV -->
         <div class="controls" id="controls"></div>
 
         <div class="cta-row" style="margin-top: 1rem;">
@@ -38,6 +45,7 @@
         </div>
       </section>
 
+      <!-- Right: Result -->
       <aside class="card readout">
         <p class="big" id="drinkName">—</p>
         <p class="mini" id="drinkDesc">Build a drink, then click identify.</p>
@@ -53,10 +61,10 @@
         </div>
       </aside>
     </div>
-  </main>
 
-  <footer class="footer">
-    <div class="container">This is a simple classifier — cafés vary on recipes, so think “approximate”.</div>
-  </footer>
+    <p style="margin-top: 1.6rem; color: var(--muted);">
+      This is a simple classifier — cafés vary on recipes, so think “approximate”.
+    </p>
+  </main>
 </body>
 </html>

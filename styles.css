@@ -9,6 +9,11 @@
   --surface-2: #F3EDE5;
   --border: #E7DDD1;
 
+  --tint: rgba(122, 78, 58, 0.08);
+  --tint-strong: rgba(122, 78, 58, 0.12);
+  --accent-soft: rgba(196, 123, 58, 0.16);
+  --accent-soft-2: rgba(196, 123, 58, 0.10);
+
   --text: #1F1A16;
   --muted: rgba(31, 26, 22, 0.72);
 
@@ -27,6 +32,7 @@
 
 *{ box-sizing: border-box; }
 html{ scroll-behavior: smooth; }
+
 body{
   margin: 0;
   font-family: var(--font-body);
@@ -94,12 +100,12 @@ section[id]{ scroll-margin-top: 88px; }
 }
 
 .nav-links a:hover{
-  background: rgba(196, 123, 58, 0.12);
+  background: rgba(196, 123, 58, 0.14);
   color: var(--coffee-900);
 }
 
 .nav-links a.active{
-  background: rgba(196, 123, 58, 0.18);
+  background: rgba(196, 123, 58, 0.20);
   color: var(--coffee-900);
 }
 
@@ -137,7 +143,7 @@ section[id]{ scroll-margin-top: 88px; }
   position:absolute;
   inset:0;
   background: linear-gradient(to bottom,
-    rgba(251,247,242,0.05),
+    rgba(196,123,58,0.03),
     rgba(251,247,242,0.65) 60%,
     rgba(251,247,242,0.92)
   );
@@ -218,7 +224,8 @@ section[id]{ scroll-margin-top: 88px; }
 }
 
 .section--alt{
-  background: rgba(243,237,229,0.55);
+  background:
+    linear-gradient(to bottom, var(--accent-soft-2), rgba(243,237,229,0.55));
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -240,6 +247,7 @@ section[id]{ scroll-margin-top: 88px; }
   max-width: 78ch;
 }
 
+/* Grid + cards */
 .grid{
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -248,18 +256,19 @@ section[id]{ scroll-margin-top: 88px; }
 }
 
 .card{
-  grid-column: span 6;
+  grid-column: span 6; /* ✅ default: half-width cards */
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(231,221,209,0.95);
   border-radius: var(--radius);
   padding: 1.2rem;
   box-shadow: var(--shadow-sm);
-  transition: transform 170ms ease, box-shadow 170ms ease;
+  transition: transform 170ms ease, box-shadow 170ms ease, border-color 170ms ease;
 }
 
 .card:hover{
   transform: translateY(-2px);
   box-shadow: var(--shadow);
+  border-color: rgba(196,123,58,0.30);
 }
 
 .card h3{
@@ -286,13 +295,13 @@ section[id]{ scroll-margin-top: 88px; }
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.2rem 0.55rem;
+  padding: 0.2rem 0.6rem;
   border-radius: 999px;
-  border: 1px solid var(--border);
-  background: rgba(243,237,229,0.55);
+  border: 1px solid rgba(196,123,58,0.25);
+  background: rgba(196,123,58,0.10);
   font-weight: 700;
   font-size: 0.82rem;
-  color: rgba(75, 46, 36, 0.85);
+  color: rgba(75, 46, 36, 0.9);
 }
 
 /* ---------- Reveal on scroll ---------- */
