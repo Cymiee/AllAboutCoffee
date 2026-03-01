@@ -3,12 +3,12 @@
 // ─── Data ───────────────────────────────────────────────────────────────────
 
 const INGREDIENTS = [
-  { key: "espresso",   label: "Espresso",     icon: "☕" },
-  { key: "water",      label: "Hot Water",    icon: "💧" },
-  { key: "milk",       label: "Steamed Milk", icon: "🥛" },
-  { key: "foam",       label: "Milk Foam",    icon: "☁️" },
-  { key: "chocolate",  label: "Chocolate",    icon: "🍫" },
-  { key: "cream",      label: "Cream",        icon: "🤍" },
+  { key: "espresso",   label: "Espresso"     },
+  { key: "water",      label: "Hot Water"    },
+  { key: "milk",       label: "Steamed Milk" },
+  { key: "foam",       label: "Milk Foam"    },
+  { key: "chocolate",  label: "Chocolate"    },
+  { key: "cream",      label: "Cream"        },
 ];
 
 // Order layers are stacked inside the cup (bottom → top)
@@ -16,7 +16,7 @@ const LAYER_ORDER = ["espresso", "water", "chocolate", "milk", "cream", "foam"];
 
 // Matches the --lc CSS custom properties in brew.html
 const LAYER_COLORS = {
-  espresso:  "#3D1A0E",
+  espresso:  "#7B3520",
   water:     "#7B9FB8",
   chocolate: "#5C3317",
   milk:      "#DEBBA0",
@@ -84,7 +84,6 @@ function renderControls() {
     card.className = "brew-ing-card";
     card.id        = `ing-${key}`;
     card.innerHTML = `
-      <span class="brew-ing-icon">${icon}</span>
       <span class="brew-ing-name">${label}</span>
       <span class="brew-ing-count" id="count-${key}">0</span>
       <div class="brew-steppers">
@@ -146,7 +145,7 @@ function updateMix() {
   const active = Object.entries(state).filter(([, v]) => v > 0);
   el.innerHTML = active
     .map(([k, v]) =>
-      `<span class="brew-mix-tag">${ingMap[k].icon} ${ingMap[k].label} ×${v}</span>`)
+      `<span class="brew-mix-tag">${ingMap[k].label} ×${v}</span>`)
     .join("");
 }
 

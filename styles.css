@@ -4,26 +4,27 @@
   --font-heading: "Playfair Display", serif;
   --font-body: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 
-  --bg: #FBF7F2;
-  --surface: #FFFFFF;
-  --surface-2: #F3EDE5;
-  --border: #E7DDD1;
+  --bg: #130904;
+  --surface: #1E110A;
+  --surface-2: #271810;
+  --border: #3A2216;
 
-  --tint: rgba(122, 78, 58, 0.08);
-  --tint-strong: rgba(122, 78, 58, 0.12);
-  --accent-soft: rgba(196, 123, 58, 0.16);
-  --accent-soft-2: rgba(196, 123, 58, 0.10);
+  --tint: rgba(196, 123, 58, 0.10);
+  --tint-strong: rgba(196, 123, 58, 0.18);
+  --accent-soft: rgba(196, 123, 58, 0.20);
+  --accent-soft-2: rgba(196, 123, 58, 0.12);
 
-  --text: #1F1A16;
-  --muted: rgba(31, 26, 22, 0.72);
+  --text: #EDE0CF;
+  --muted: rgba(237, 224, 207, 0.55);
 
-  --coffee-900: #2A1A12;
-  --coffee-700: #4B2E24;
+  /* "900" = lightest text used on headings; "700" = warm mid-tone */
+  --coffee-900: #F0E2CC;
+  --coffee-700: #C4926A;
 
   --accent: #C47B3A;
 
-  --shadow-sm: 0 8px 22px rgba(42, 26, 18, 0.08);
-  --shadow: 0 18px 48px rgba(42, 26, 18, 0.12);
+  --shadow-sm: 0 8px 22px rgba(0, 0, 0, 0.35);
+  --shadow: 0 18px 48px rgba(0, 0, 0, 0.55);
 
   --radius: 16px;
   --radius-sm: 12px;
@@ -59,9 +60,9 @@ section[id]{ scroll-margin-top: 88px; }
   top: 0;
   z-index: 50;
 
-  background: rgba(251, 247, 242, 0.86);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  background: rgba(15, 7, 2, 0.88);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 
   display: flex;
@@ -127,9 +128,9 @@ section[id]{ scroll-margin-top: 88px; }
   inset: -30% -10% -30% -10%;
   background:
     radial-gradient(circle at 30% 15%,
-      rgba(255,255,255,0.80),
-      rgba(251,247,242,0.92) 55%,
-      rgba(243,237,229,0.97)
+      rgba(10,4,1,0.50),
+      rgba(8,3,1,0.80) 55%,
+      rgba(6,2,0,0.95)
     ),
     url("./assets/coffee-cup-leaves-bg.jpg");
   background-size: cover;
@@ -143,9 +144,9 @@ section[id]{ scroll-margin-top: 88px; }
   position:absolute;
   inset:0;
   background: linear-gradient(to bottom,
-    rgba(196,123,58,0.03),
-    rgba(251,247,242,0.65) 60%,
-    rgba(251,247,242,0.92)
+    transparent,
+    rgba(10,4,1,0.60) 60%,
+    rgba(10,4,1,0.90)
   );
   pointer-events:none;
 }
@@ -161,7 +162,7 @@ section[id]{ scroll-margin-top: 88px; }
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-size: 0.78rem;
-  color: rgba(75, 46, 36, 0.75);
+  color: rgba(196, 123, 58, 0.85);
   margin: 0 0 0.75rem;
 }
 
@@ -187,8 +188,8 @@ section[id]{ scroll-margin-top: 88px; }
   inset: -20%;
   background:
     linear-gradient(
-      rgba(251,247,242,0.88),
-      rgba(243,237,229,0.92)
+      rgba(10,4,1,0.82),
+      rgba(14,7,2,0.90)
     ),
     url("./assets/coffee-beans-bg.jpg");
   background-size: cover;
@@ -240,7 +241,7 @@ section[id]{ scroll-margin-top: 88px; }
 .button.secondary{
   background: transparent;
   color: var(--coffee-900);
-  border-color: var(--border);
+  border-color: rgba(196, 123, 58, 0.35);
   box-shadow: none;
 }
 
@@ -251,7 +252,7 @@ section[id]{ scroll-margin-top: 88px; }
 
 .section--alt{
   background:
-    linear-gradient(to bottom, var(--accent-soft-2), rgba(243,237,229,0.55));
+    linear-gradient(to bottom, rgba(196,123,58,0.07), rgba(10,4,1,0.35));
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -282,9 +283,9 @@ section[id]{ scroll-margin-top: 88px; }
 }
 
 .card{
-  grid-column: span 6; /* ✅ default: half-width cards */
+  grid-column: span 6;
   background: var(--surface);
-  border: 1px solid rgba(231,221,209,0.95);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.2rem;
   box-shadow: var(--shadow-sm);
@@ -327,7 +328,7 @@ section[id]{ scroll-margin-top: 88px; }
   background: rgba(196,123,58,0.10);
   font-weight: 700;
   font-size: 0.82rem;
-  color: rgba(75, 46, 36, 0.9);
+  color: var(--coffee-700);
 }
 
 /* ---------- Reveal on scroll ---------- */
@@ -345,7 +346,7 @@ section[id]{ scroll-margin-top: 88px; }
 .footer{
   border-top: 1px solid var(--border);
   padding: 1.75rem 0;
-  color: rgba(31, 26, 22, 0.72);
+  color: var(--muted);
   font-size: 0.95rem;
 }
 
@@ -436,8 +437,6 @@ section[id]{ scroll-margin-top: 88px; }
   border-color: rgba(196,123,58,0.50);
   box-shadow: 0 0 0 3px rgba(196,123,58,0.09), var(--shadow-sm);
 }
-
-.brew-ing-icon { font-size: 1.75rem; line-height: 1; }
 
 .brew-ing-name {
   font-size: 0.72rem;
