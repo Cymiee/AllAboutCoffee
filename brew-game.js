@@ -24,7 +24,21 @@ const LAYER_COLORS = {
   foam:      "#D6C9BB",
 };
 
+// Characteristic blended colour shown after "Mix my drink"
+const DRINK_COLORS = {
+  "Espresso":    "#3B1A0C",
+  "Americano":   "#5C2D12",
+  "Latte":       "#C08060",
+  "Cappuccino":  "#C89070",
+  "Flat White":  "#A87050",
+  "Cortado":     "#8A5838",
+  "Mocha":       "#3E1D0E",
+  "Breve Latte": "#C8A070",
+};
+
 const state = Object.fromEntries(INGREDIENTS.map(i => [i.key, 0]));
+let isMixed = false;
+let isCold  = false;
 
 // ─── Utilities ───────────────────────────────────────────────────────────────
 
@@ -50,7 +64,7 @@ function updateCup() {
   });
 
   const steam = document.getElementById("cupSteam");
-  if (steam) steam.classList.toggle("is-active", total > 0);
+  if (steam) steam.classList.toggle("is-active", total > 0 && !isCold);
 
   updateLegend(total);
 }
@@ -79,7 +93,7 @@ function renderControls() {
   if (!root) return;
   root.innerHTML = "";
 
-  INGREDIENTS.forEach(({ key, label, icon }) => {
+  INGREDIENTS.forEach(({ key, label }) => {
     const card = document.createElement("div");
     card.className = "brew-ing-card";
     card.id        = `ing-${key}`;
@@ -128,6 +142,7 @@ function initSteppers() {
     if (!key || isNaN(delta)) return;
 
     state[key] = clamp(state[key] + delta, 0, 10);
+    unmix();          // reset mixed view when recipe changes
     updateCard(key);
     updateCup();
     updateMix();
@@ -182,11 +197,12 @@ function identifyDrink() {
   const total = Object.values(input).reduce((a, b) => a + b, 0);
 
   if (total === 0) {
-    return { name: "—", desc: "Build a drink using the ingredient cards.", confidence: 0 };
+    return { name: "—", displayName: "—", desc: "Build a drink using the ingredient cards.", confidence: 0 };
   }
   if (input.espresso === 0) {
     return {
       name: "Not espresso-based",
+      displayName: "Not espresso-based",
       desc: "Most café classics start with espresso. Add at least one shot.",
       confidence: 20,
     };
@@ -228,8 +244,9 @@ function identifyDrink() {
   const tip        = makeTip(input, best.name);
 
   return {
-    name: best.name,
-    desc: best.desc + (tip ? ` ${tip}` : ""),
+    name:        best.name,
+    displayName: isCold ? `Iced ${best.name}` : best.name,
+    desc:        best.desc + (tip ? ` ${tip}` : ""),
     confidence,
   };
 }
@@ -244,7 +261,7 @@ function setResult(r) {
   const arcEl  = document.getElementById("ringArc");
   const pctEl  = document.getElementById("confidencePct");
 
-  if (nameEl) nameEl.textContent = r.name;
+  if (nameEl) nameEl.textContent = r.displayName ?? r.name;
   if (descEl) descEl.textContent = r.desc;
 
   const conf = clamp(r.confidence, 0, 100);
@@ -260,13 +277,108 @@ function setResult(r) {
   if (pctEl) pctEl.textContent = conf > 0 ? `${conf}%` : "—";
 }
 
+// ─── Mix animation ───────────────────────────────────────────────────────────
+
+function mixDrink() {
+  const result  = identifyDrink();
+  const total   = Object.values(state).reduce((a, b) => a + b, 0);
+  if (total === 0) return;
+
+  const color   = DRINK_COLORS[result.name] || "#6B3A1F";
+  const fillPct = Math.min(total / MAX_PARTS, 1) * 100;
+  const cupWrap = document.querySelector(".cup-wrap");
+  const cupBody = document.getElementById("cupBody");
+
+  // 1. Shake the whole cup assembly
+  if (cupWrap) {
+    cupWrap.classList.add("is-shaking");
+    setTimeout(() => cupWrap.classList.remove("is-shaking"), 700);
+  }
+
+  // 2. After the shake settles, blend layers into one colour
+  setTimeout(() => {
+    // Fade out individual layers
+    LAYER_ORDER.forEach(key => {
+      const el = document.getElementById(`layer-${key}`);
+      if (!el) return;
+      el.style.transition = "opacity 300ms ease";
+      el.style.opacity = "0";
+    });
+
+    // Create / update the mixed layer
+    let mixedEl = document.getElementById("layer-mixed");
+    if (!mixedEl) {
+      mixedEl = document.createElement("div");
+      mixedEl.id = "layer-mixed";
+      mixedEl.className = "cup-layer cup-layer--mixed";
+      if (cupBody) cupBody.appendChild(mixedEl);
+    }
+    mixedEl.style.setProperty("--lc", color);
+    mixedEl.style.height = `${fillPct}%`;
+    mixedEl.style.bottom = "0%";
+
+    // Trigger fade-in on next frame so the transition fires
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      mixedEl.style.opacity = "1";
+    }));
+
+    isMixed = true;
+    setResult(result);
+  }, 450);
+}
+
+function unmix() {
+  if (!isMixed) return;
+  isMixed = false;
+
+  // Restore individual layers
+  LAYER_ORDER.forEach(key => {
+    const el = document.getElementById(`layer-${key}`);
+    if (!el) return;
+    el.style.transition = "";
+    el.style.opacity    = "1";
+  });
+
+  // Remove the mixed layer
+  document.getElementById("layer-mixed")?.remove();
+}
+
+// ─── Temperature toggle ──────────────────────────────────────────────────────
+
+function initTempToggle() {
+  const hotBtn  = document.getElementById("btnHot");
+  const coldBtn = document.getElementById("btnCold");
+  if (!hotBtn || !coldBtn) return;
+
+  function setTemp(cold) {
+    isCold = cold;
+    hotBtn.classList.toggle("active", !cold);
+    coldBtn.classList.toggle("active", cold);
+
+    const cupWrap = document.querySelector(".cup-wrap");
+    if (cupWrap) cupWrap.classList.toggle("is-cold", cold);
+
+    // Steam only when hot + has something in the cup
+    const total = Object.values(state).reduce((a, b) => a + b, 0);
+    const steam = document.getElementById("cupSteam");
+    if (steam) steam.classList.toggle("is-active", !cold && total > 0);
+
+    // Re-display result with/without "Iced" prefix
+    setResult(identifyDrink());
+  }
+
+  hotBtn.addEventListener("click",  () => setTemp(false));
+  coldBtn.addEventListener("click", () => setTemp(true));
+}
+
 // ─── Reset ───────────────────────────────────────────────────────────────────
 
 function reset() {
   Object.keys(state).forEach(k => { state[k] = 0; updateCard(k); });
+  unmix();
   updateCup();
   updateMix();
-  setResult({ name: "—", desc: "Build a drink using the ingredient cards.", confidence: 0 });
+  setResult({ name: "—", displayName: "—", desc: "Build a drink using the ingredient cards.", confidence: 0 });
 }
 
 // ─── Boot ────────────────────────────────────────────────────────────────────
@@ -274,10 +386,11 @@ function reset() {
 document.addEventListener("DOMContentLoaded", () => {
   renderControls();
   initSteppers();
-  setResult({ name: "—", desc: "Build a drink using the ingredient cards.", confidence: 0 });
+  initTempToggle();
+  setResult({ name: "—", displayName: "—", desc: "Build a drink using the ingredient cards.", confidence: 0 });
 
-  document.getElementById("btnIdentify")
-    ?.addEventListener("click", () => setResult(identifyDrink()));
+  document.getElementById("btnMix")
+    ?.addEventListener("click", mixDrink);
 
   document.getElementById("btnReset")
     ?.addEventListener("click", reset);
