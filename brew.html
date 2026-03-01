@@ -20,52 +20,87 @@
     </nav>
   </header>
 
-  <main class="container" style="padding: 2rem 0 3.5rem;">
-    <h1 style="font-family: var(--font-heading); margin: 0 0 0.6rem; color: var(--coffee-900);">
-      Brew Your Own Coffee
-    </h1>
-    <p style="max-width: 80ch; margin: 0 0 1.4rem; color: var(--muted);">
-      Add ingredients and the site will guess what drink you made. Think in “parts”:
-      1 espresso shot is a part; water/milk/foam add volume and change the style.
-    </p>
-
-    <!-- ✅ THIS WRAPPER IS WHAT MAKES IT 2-COLUMN -->
-    <div class="brew-wrap">
-      <!-- Left: Controls -->
-      <section class="card">
-        <h2 style="font-family: var(--font-heading); margin: 0 0 0.8rem; color: var(--coffee-900);">
-          Ingredients
-        </h2>
-
-        <!-- ✅ JS RENDERS CONTROLS INTO THIS DIV -->
-        <div class="controls" id="controls"></div>
-
-        <div class="cta-row" style="margin-top: 1rem;">
-          <button class="button" id="btnIdentify" type="button">Identify my drink</button>
-          <button class="button secondary" id="btnReset" type="button">Reset</button>
-        </div>
-      </section>
-
-      <!-- Right: Result -->
-      <aside class="card readout">
-        <p class="big" id="drinkName">—</p>
-        <p class="mini" id="drinkDesc">Build a drink, then click identify.</p>
-
-        <div>
-          <p class="mini" style="margin-bottom: 0.35rem;">Confidence</p>
-          <div class="meter"><div id="confidenceBar"></div></div>
-        </div>
-
-        <div class="card" style="padding: 0.95rem; box-shadow: none;">
-          <p class="mini" style="margin:0 0 0.35rem;"><strong>Your mix</strong></p>
-          <p class="mini" id="mixSummary" style="margin:0;">—</p>
-        </div>
-      </aside>
+  <!-- Dark cinematic hero -->
+  <div class="brew-hero">
+    <div class="container brew-hero__inner">
+      <p class="brew-hero__eyebrow">Interactive</p>
+      <h1 class="brew-hero__title">Brew Your Own</h1>
+      <p class="brew-hero__sub">
+        Add ingredients and watch your drink take shape in real time.
+        The cup fills as you build — see if you can nail a classic.
+      </p>
     </div>
+  </div>
 
-    <p style="margin-top: 1.6rem; color: var(--muted);">
-      This is a simple classifier — cafés vary on recipes, so think “approximate”.
-    </p>
+  <main class="brew-layout container" data-page="brew">
+
+    <!-- ── Left: ingredient cards ── -->
+    <section class="brew-controls">
+      <h2 class="brew-col-label">Your Ingredients</h2>
+      <div class="brew-ing-grid" id="controls">
+        <!-- Rendered by brew-game.js -->
+      </div>
+      <div class="brew-action-row">
+        <button class="button" id="btnIdentify" type="button">Identify my drink</button>
+        <button class="button secondary" id="btnReset" type="button">Reset</button>
+      </div>
+      <p class="brew-note">Recipes are approximate — real cafés vary by barista.</p>
+    </section>
+
+    <!-- ── Right: animated cup + result ── -->
+    <aside class="brew-readout">
+
+      <!-- Cup visualization -->
+      <div class="cup-scene">
+        <div class="cup-steam" id="cupSteam">
+          <span></span><span></span><span></span>
+        </div>
+
+        <div class="cup-wrap">
+          <div class="cup-rim"></div>
+          <div class="cup-body" id="cupBody">
+            <!-- Layers filled bottom-up by JS (order = visual stack order) -->
+            <div class="cup-layer" id="layer-espresso"  style="--lc:#3D1A0E"></div>
+            <div class="cup-layer" id="layer-water"     style="--lc:#7B9FB8"></div>
+            <div class="cup-layer" id="layer-chocolate" style="--lc:#5C3317"></div>
+            <div class="cup-layer" id="layer-milk"      style="--lc:#DEBBA0"></div>
+            <div class="cup-layer" id="layer-cream"     style="--lc:#E8C87A"></div>
+            <div class="cup-layer" id="layer-foam"      style="--lc:#D6C9BB"></div>
+          </div>
+          <div class="cup-handle"></div>
+        </div>
+
+        <!-- Colour-coded layer legend -->
+        <div class="cup-legend" id="cupLegend"></div>
+      </div>
+
+      <!-- Result card -->
+      <div class="brew-result">
+        <div class="brew-result__top">
+
+          <!-- SVG confidence ring -->
+          <div class="brew-ring-wrap">
+            <svg class="brew-ring" viewBox="0 0 100 100" aria-hidden="true">
+              <circle class="brew-ring__bg"  cx="50" cy="50" r="38"/>
+              <circle class="brew-ring__arc" cx="50" cy="50" r="38" id="ringArc"/>
+            </svg>
+            <span class="brew-ring__pct" id="confidencePct">—</span>
+          </div>
+
+          <div class="brew-result__text">
+            <p class="brew-result__label">You made</p>
+            <p class="brew-result__name" id="drinkName">—</p>
+          </div>
+        </div>
+
+        <p class="brew-result__desc" id="drinkDesc">
+          Build a drink using the ingredient cards on the left.
+        </p>
+
+        <div class="brew-mix" id="mixSummary"></div>
+      </div>
+
+    </aside>
   </main>
 </body>
 </html>
