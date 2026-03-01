@@ -18,6 +18,9 @@
       <a href="index.html#glossary">Glossary</a>
       <a class="game-link" href="brew.html">Brew Your Own</a>
     </nav>
+    <button class="theme-toggle" id="btnTheme" type="button" aria-label="Toggle dark mode">
+      <span class="theme-toggle__knob"></span>
+    </button>
   </header>
 
   <!-- Dark cinematic hero -->
@@ -41,8 +44,14 @@
         <!-- Rendered by brew-game.js -->
       </div>
       <div class="brew-action-row">
-        <button class="button" id="btnIdentify" type="button">Identify my drink</button>
+        <button class="button" id="btnMix" type="button">Mix my drink</button>
         <button class="button secondary" id="btnReset" type="button">Reset</button>
+      </div>
+      <div class="brew-temp-row">
+        <div class="temp-toggle">
+          <button class="temp-btn active" id="btnHot"  type="button">Hot</button>
+          <button class="temp-btn"        id="btnCold" type="button">Iced</button>
+        </div>
       </div>
       <p class="brew-note">Recipes are approximate — real cafés vary by barista.</p>
     </section>
