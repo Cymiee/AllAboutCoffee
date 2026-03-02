@@ -155,34 +155,8 @@
   }
 
   // =========================
-  // 6) Theme toggle
-  // =========================
-  function initThemeToggle() {
-    // Restore saved preference before anything renders
-    const saved = localStorage.getItem("aac-theme");
-    if (saved === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
-
-    const btn = document.getElementById("btnTheme");
-    if (!btn) return;
-
-    btn.addEventListener("click", () => {
-      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-      if (isDark) {
-        document.documentElement.removeAttribute("data-theme");
-        localStorage.setItem("aac-theme", "light");
-      } else {
-        document.documentElement.setAttribute("data-theme", "dark");
-        localStorage.setItem("aac-theme", "dark");
-      }
-    });
-  }
-
-  // =========================
   // Boot
   // =========================
-  initThemeToggle();
   initSmoothAnchors();
   initScrollReveal();
   initHeroParallax();

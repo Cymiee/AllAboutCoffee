@@ -1,43 +1,34 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&family=Nunito:wght@400;500;600;700&display=swap");
 
 :root{
-  --font-heading: "Playfair Display", serif;
-  --font-body: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-heading: "Comfortaa", cursive;
+  --font-body: "Nunito", system-ui, sans-serif;
 
-  /* ── Light theme (default) ── */
-  --bg: #FBF7F2;
-  --surface: #FFFFFF;
-  --surface-2: #F4EDE4;
-  --border: rgba(139, 90, 43, 0.18);
+  /* ── Unified coffee-brown theme ── */
+  --bg: #2A1810;
+  --surface: #38211A;
+  --surface-2: #46291E;
+  --border: rgba(196, 123, 58, 0.22);
 
   --tint: rgba(196, 123, 58, 0.08);
   --tint-strong: rgba(196, 123, 58, 0.14);
-  --accent-soft: rgba(196, 123, 58, 0.12);
-  --accent-soft-2: rgba(196, 123, 58, 0.08);
+  --accent-soft: rgba(196, 123, 58, 0.14);
+  --accent-soft-2: rgba(196, 123, 58, 0.09);
 
-  --text: #1A0F08;
-  --muted: rgba(26, 15, 8, 0.55);
+  --text: #F0E4CE;
+  --muted: rgba(240, 228, 206, 0.58);
 
-  /* "900" = darkest heading; "700" = warm mid-tone */
-  --coffee-900: #2D1A0E;
-  --coffee-700: #7B4A1F;
+  --coffee-900: #F5ECD8;
+  --coffee-700: #D4906A;
 
   --accent: #C47B3A;
 
-  --shadow-sm: 0 2px 6px rgba(0,0,0,0.05), 0 6px 18px rgba(0,0,0,0.07);
-  --shadow: 0 8px 32px rgba(0,0,0,0.12);
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.28);
+  --shadow: 0 12px 36px rgba(0,0,0,0.45);
 
   --radius: 16px;
   --radius-sm: 12px;
   --container: 1100px;
-
-  /* ── Component tokens that vary per theme ── */
-  --nav-glass: rgba(251, 247, 242, 0.88);
-  --hero-fade:     rgba(251, 247, 242, 0.45);
-  --hero-fade-end: rgba(251, 247, 242, 1);
-  --beans-overlay-top: rgba(251, 247, 242, 0.72);
-  --beans-overlay-bot: rgba(244, 237, 228, 0.85);
-  --section-alt-end: rgba(196, 123, 58, 0.10);
 }
 
 *{ box-sizing: border-box; }
@@ -69,7 +60,7 @@ section[id]{ scroll-margin-top: 88px; }
   top: 0;
   z-index: 50;
 
-  background: var(--nav-glass);
+  background: rgba(26, 12, 6, 0.90);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -157,8 +148,8 @@ section[id]{ scroll-margin-top: 88px; }
   inset:0;
   background: linear-gradient(to bottom,
     transparent,
-    var(--hero-fade) 60%,
-    var(--hero-fade-end)
+    rgba(42, 24, 16, 0.65) 60%,
+    rgba(42, 24, 16, 1)
   );
   pointer-events:none;
 }
@@ -201,8 +192,8 @@ section[id]{ scroll-margin-top: 88px; }
   inset: -20%;
   background:
     linear-gradient(
-      var(--beans-overlay-top),
-      var(--beans-overlay-bot)
+      rgba(20, 8, 4, 0.78),
+      rgba(28, 12, 6, 0.88)
     ),
     url("./assets/coffee-beans-bg.jpg");
   background-size: cover;
@@ -272,7 +263,7 @@ section[id]{ scroll-margin-top: 88px; }
 
 .section--alt{
   background:
-    linear-gradient(to bottom, rgba(196,123,58,0.06), var(--section-alt-end));
+    linear-gradient(to bottom, rgba(196,123,58,0.06), rgba(0,0,0,0.18));
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -918,78 +909,6 @@ section[id]{ scroll-margin-top: 88px; }
 @media (max-width: 420px) {
   .drink-grid { grid-template-columns: 1fr; }
   .drink-card { aspect-ratio: 4 / 3; }
-}
-
-/* =========================
-   Dark theme override
-========================= */
-
-[data-theme="dark"] {
-  --bg: #130904;
-  --surface: #1E110A;
-  --surface-2: #271810;
-  --border: #3A2216;
-
-  --text: #EDE0CF;
-  --muted: rgba(237, 224, 207, 0.55);
-
-  --coffee-900: #F0E2CC;
-  --coffee-700: #C4926A;
-
-  --shadow-sm: 0 8px 22px rgba(0, 0, 0, 0.35);
-  --shadow: 0 18px 48px rgba(0, 0, 0, 0.55);
-
-  --nav-glass: rgba(15, 7, 2, 0.88);
-  --hero-fade:     rgba(10, 4, 1, 0.60);
-  --hero-fade-end: rgba(10, 4, 1, 0.90);
-  --beans-overlay-top: rgba(10, 4, 1, 0.82);
-  --beans-overlay-bot: rgba(14, 7, 2, 0.90);
-  --section-alt-end: rgba(10, 4, 1, 0.35);
-}
-
-[data-theme="dark"] .hero-bg {
-  background:
-    radial-gradient(ellipse at 18% 45%, rgba(196,123,58,0.20) 0%, transparent 52%),
-    radial-gradient(ellipse at 82% 18%, rgba(140,60,20,0.12) 0%, transparent 44%),
-    linear-gradient(158deg,
-      #1C0C04 0%,
-      #2A1408 38%,
-      #1A0A04 72%,
-      #110604 100%
-    );
-}
-
-/* =========================
-   Theme toggle pill
-========================= */
-
-.theme-toggle {
-  width: 44px;
-  height: 24px;
-  border-radius: 12px;
-  border: 1.5px solid var(--border);
-  background: var(--surface-2);
-  cursor: pointer;
-  padding: 0 0 0 3px;
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  transition: background 220ms ease, border-color 220ms ease;
-}
-
-.theme-toggle__knob {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--coffee-700);
-  transform: translateX(0);
-  transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1), background 220ms ease;
-  flex-shrink: 0;
-}
-
-[data-theme="dark"] .theme-toggle__knob {
-  transform: translateX(18px);
-  background: var(--accent);
 }
 
 /* =========================
