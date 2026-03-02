@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&family=Nunito:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Miniver&family=Comfortaa:wght@600;700&family=Nunito:wght@400;500;600;700&display=swap");
 
 :root{
   --font-heading: "Comfortaa", cursive;
@@ -73,13 +73,13 @@ section[id]{ scroll-margin-top: 88px; }
 }
 
 .brand{
-  font-family: var(--font-heading);
-  font-weight: 700;
-  letter-spacing: 0.2px;
+  font-family: "Miniver", cursive;
+  font-weight: 400;
+  font-size: 1.25rem;
+  letter-spacing: 0.3px;
   color: var(--coffee-900);
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
 }
 
 .nav-links{
