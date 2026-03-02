@@ -75,11 +75,23 @@ section[id]{ scroll-margin-top: 88px; }
 .brand{
   font-family: "Miniver", cursive;
   font-weight: 400;
-  font-size: 1.25rem;
+  font-size: 1.45rem;
   letter-spacing: 0.3px;
   color: var(--coffee-900);
   display: inline-flex;
   align-items: center;
+  gap: 0.5rem;
+}
+
+.brand__icon {
+  /* wider than tall → object-fit:cover crops the blank top/bottom padding */
+  width: 46px;
+  height: 37px;
+  object-fit: cover;
+  object-position: center 46%;
+  border-radius: 6px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.30));
 }
 
 .nav-links{
