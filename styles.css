@@ -33,8 +33,8 @@
 
   /* ── Component tokens that vary per theme ── */
   --nav-glass: rgba(251, 247, 242, 0.88);
-  --hero-fade:     rgba(251, 247, 242, 0.55);
-  --hero-fade-end: rgba(251, 247, 242, 0.95);
+  --hero-fade:     rgba(251, 247, 242, 0.45);
+  --hero-fade-end: rgba(251, 247, 242, 1);
   --beans-overlay-top: rgba(251, 247, 242, 0.72);
   --beans-overlay-bot: rgba(244, 237, 228, 0.85);
   --section-alt-end: rgba(196, 123, 58, 0.10);
@@ -136,14 +136,17 @@ section[id]{ scroll-margin-top: 88px; }
   position: absolute;
   inset: -30% -10% -30% -10%;
   background:
-    radial-gradient(circle at 30% 15%,
-      rgba(10,4,1,0.50),
-      rgba(8,3,1,0.80) 55%,
-      rgba(6,2,0,0.95)
-    ),
-    url("./assets/coffee-cup-leaves-bg.jpg");
-  background-size: cover;
-  background-position: center;
+    /* warm amber glow, left-center */
+    radial-gradient(ellipse at 18% 45%, rgba(196,123,58,0.28) 0%, transparent 52%),
+    /* faint warm spot, top-right */
+    radial-gradient(ellipse at 82% 18%, rgba(160,80,30,0.14) 0%, transparent 44%),
+    /* rich espresso-to-mahogany base */
+    linear-gradient(158deg,
+      #3E1C0C 0%,
+      #5A2A14 38%,
+      #3A1808 72%,
+      #261006 100%
+    );
   transform: translate3d(0,0,0) scale(1.06);
   will-change: transform;
 }
@@ -942,6 +945,18 @@ section[id]{ scroll-margin-top: 88px; }
   --beans-overlay-top: rgba(10, 4, 1, 0.82);
   --beans-overlay-bot: rgba(14, 7, 2, 0.90);
   --section-alt-end: rgba(10, 4, 1, 0.35);
+}
+
+[data-theme="dark"] .hero-bg {
+  background:
+    radial-gradient(ellipse at 18% 45%, rgba(196,123,58,0.20) 0%, transparent 52%),
+    radial-gradient(ellipse at 82% 18%, rgba(140,60,20,0.12) 0%, transparent 44%),
+    linear-gradient(158deg,
+      #1C0C04 0%,
+      #2A1408 38%,
+      #1A0A04 72%,
+      #110604 100%
+    );
 }
 
 /* =========================
