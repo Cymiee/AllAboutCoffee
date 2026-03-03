@@ -137,20 +137,11 @@ section[id]{ scroll-margin-top: 88px; }
 
 .hero-bg{
   position: absolute;
-  inset: -30% -10% -30% -10%;
+  inset: -15% 0;
   background:
-    /* warm amber glow, left-center */
-    radial-gradient(ellipse at 18% 45%, rgba(196,123,58,0.28) 0%, transparent 52%),
-    /* faint warm spot, top-right */
-    radial-gradient(ellipse at 82% 18%, rgba(160,80,30,0.14) 0%, transparent 44%),
-    /* rich espresso-to-mahogany base */
-    linear-gradient(158deg,
-      #3E1C0C 0%,
-      #5A2A14 38%,
-      #3A1808 72%,
-      #261006 100%
-    );
-  transform: translate3d(0,0,0) scale(1.06);
+    url('./assets/hero/bg.png')
+    center / cover no-repeat;
+  transform: translate3d(0,0,0) scaleX(-1);
   will-change: transform;
 }
 
