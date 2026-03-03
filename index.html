@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles.css" />
   <script src="main.js" defer></script>
+  <script src="quiz.js" defer></script>
   <title>All About Coffee</title>
 </head>
 <body>
@@ -27,7 +28,7 @@
 
     <div class="container hero-inner reveal">
       <p class="eyebrow">Coffee 101</p>
-      <h1>Learn coffee like a barista (without the stress).</h1>
+      <h1>Fall in love with coffee, one sip at a time</h1>
       <p class="lead">
         Scroll for beans, drinks, and brewing tutorials. Then try the <strong>Brew Your Own</strong>
         mini game to see what drink your recipe matches.
@@ -36,6 +37,66 @@
       <div class="cta-row">
         <a class="button" href="#beans">Start learning ↓</a>
         <a class="button secondary" href="brew.html">Play Brew Your Own →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="section section--alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Find Your Drink</h2>
+        <p>Three questions. One perfect cup.</p>
+      </div>
+      <div class="quiz-wrap">
+        <div class="quiz-progress">
+          <span class="quiz-progress__dot active"></span>
+          <span class="quiz-progress__dot"></span>
+          <span class="quiz-progress__dot"></span>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="quiz-step active" data-step="1">
+          <h3>How strong do you like your coffee?</h3>
+          <div class="quiz-options">
+            <button class="quiz-option" data-key="q1" data-val="light">Chill &amp; easy</button>
+            <button class="quiz-option" data-key="q1" data-val="medium">Balanced &amp; smooth</button>
+            <button class="quiz-option" data-key="q1" data-val="strong">Strong &amp; bold</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="quiz-step" data-step="2">
+          <h3>How do you feel about milk?</h3>
+          <div class="quiz-options">
+            <button class="quiz-option" data-key="q2" data-val="none">No milk, thanks</button>
+            <button class="quiz-option" data-key="q2" data-val="little">Just a splash</button>
+            <button class="quiz-option" data-key="q2" data-val="lots">The milkier the better</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="quiz-step" data-step="3">
+          <h3>Anything extra?</h3>
+          <div class="quiz-options">
+            <button class="quiz-option" data-key="q3" data-val="plain">Keep it simple</button>
+            <button class="quiz-option" data-key="q3" data-val="choc">Add chocolate</button>
+            <button class="quiz-option" data-key="q3" data-val="cream">Make it creamy</button>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="quiz-result">
+          <div class="quiz-result__card">
+            <span class="chip" id="quizChip"></span>
+            <h3 id="quizName"></h3>
+            <p id="quizDesc"></p>
+            <div class="quiz-result__actions">
+              <a class="button" href="brew.html" id="quizCta">Try making it →</a>
+              <button class="button secondary" id="quizRestart">Start over</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
