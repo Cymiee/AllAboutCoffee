@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="articles.js" defer></script>
+  <script src="main.js" defer></script>
+  <script src="guides-hub.js" defer></script>
+  <title>Guides | All About Coffee</title>
+</head>
+<body>
+  <header class="top-nav">
+    <a class="brand" href="index.html#top">
+      <img src="assets/coffee-cup-illustration.png" alt="" class="brand__icon" />
+      All About Coffee
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#beans">Beans</a>
+      <a href="index.html#drinks">Drinks</a>
+      <a href="index.html#tutorials">Tutorials</a>
+      <a href="guides.html">Guides</a>
+      <a href="index.html#glossary">Glossary</a>
+      <a class="game-link" href="brew.html">Brew Your Own</a>
+    </nav>
+  </header>
+
+  <div class="guides-hero">
+    <div class="container guides-hero__inner">
+      <p class="eyebrow">Read up</p>
+      <h1 class="guides-hero__title">Coffee Guides</h1>
+      <p class="guides-hero__sub">
+        Longer reads on the questions that come up once you start paying
+        attention to what's in your cup. Pick whatever you're curious about.
+      </p>
+    </div>
+  </div>
+
+  <main class="section" data-page="guides">
+    <div class="container">
+
+      <!-- ── Filter + search controls ── -->
+      <div class="guide-controls reveal">
+        <div class="guide-filters" id="guideFilters" role="group" aria-label="Filter guides by topic">
+          <!-- chips injected by guides-hub.js -->
+        </div>
+        <label class="guide-search">
+          <span class="visually-hidden">Search guides</span>
+          <input type="search" id="guideSearch" placeholder="Search guides…" autocomplete="off" />
+        </label>
+      </div>
+
+      <p class="guide-count" id="guideCount" aria-live="polite"></p>
+
+      <!-- ── Card grid ── -->
+      <div class="guide-grid" id="guideGrid">
+        <!-- cards injected by guides-hub.js -->
+      </div>
+
+      <p class="guide-empty" id="guideEmpty" hidden>
+        No guides match that. <button class="link-button" id="guideReset">Clear filters</button>
+      </p>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      Want to test your knowledge? Try <a href="brew.html"><strong>Brew Your Own</strong></a>.
+    </div>
+  </footer>
+</body>
+</html>

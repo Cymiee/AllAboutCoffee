@@ -52,30 +52,45 @@
   // =========================
   // 2) Scroll reveal animations
   // =========================
-  function initScrollReveal() {
-    const revealTargets = qsa(".reveal, .card");
+  let revealObs = null;
+
+  /**
+   * Observe reveal targets inside `root`. Safe to call again after
+   * injecting markup (the guides hub does this when filtering), which is
+   * why it is exposed as window.refreshReveal — without it, dynamically
+   * added .reveal elements would keep opacity:0 forever.
+   */
+  function observeReveal(root = document) {
+    const revealTargets = qsa(".reveal, .card", root);
 
     // Ensure everything we want to animate has .reveal class
     revealTargets.forEach((el) => el.classList.add("reveal"));
 
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || !revealObs) {
       // Immediately reveal without animation
       revealTargets.forEach((el) => el.classList.add("in"));
       return;
     }
 
-    const revealObs = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("in");
-          obs.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.12 }
-    );
-
     revealTargets.forEach((el) => revealObs.observe(el));
+  }
+
+  function initScrollReveal() {
+    if (!prefersReducedMotion) {
+      revealObs = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("in");
+            obs.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.12 }
+      );
+    }
+
+    observeReveal(document);
+    window.refreshReveal = observeReveal;
   }
 
   // =========================
