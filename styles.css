@@ -1412,3 +1412,60 @@ section[id]{ scroll-margin-top: 88px; }
   .guide-search input{ width: 100%; }
   .guides-hero{ padding-top: 4rem; }
 }
+
+/* ==========================================================================
+   HERO — split layout (copy left, photo panel right)
+   The photo is portrait 2:3, so it lives in its own panel rather than being
+   cropped to a wide background. Falls back to a single column on mobile.
+   ========================================================================== */
+.hero-inner{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+.hero-copy{ min-width: 0; }
+
+.hero-figure{
+  position: relative;
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  /* Crop the tall photo to a calmer portrait without losing the cup */
+  aspect-ratio: 4 / 5;
+}
+.hero-figure img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Bias toward the lower half so the cup stays centred in the crop */
+  object-position: 50% 62%;
+  display: block;
+}
+/* Warm gold edge-glow, echoing the dark/gold reference */
+.hero-figure::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 60px rgba(196, 123, 58, 0.18);
+  pointer-events: none;
+}
+
+/* The ambient background image competes with the photo panel — soften it. */
+.hero .hero-bg{ opacity: 0.35; }
+
+@media (max-width: 860px){
+  .hero-inner{
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .hero-figure{
+    aspect-ratio: 3 / 2;
+    order: -1;            /* photo first on small screens */
+  }
+  .hero-figure img{ object-position: 50% 55%; }
+}
