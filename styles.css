@@ -135,30 +135,6 @@ section[id]{ scroll-margin-top: 88px; }
   padding: clamp(3rem, 7vw, 5rem) 0;
 }
 
-.hero-bg{
-  position: absolute;
-  inset: -15% 0;
-  background:
-    url('./assets/hero/bg.png')
-    center / cover no-repeat;
-  transform: translate3d(0,0,0) scaleX(-1);
-  will-change: transform;
-  z-index: -2;
-}
-
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(to bottom,
-    transparent,
-    rgba(42, 24, 16, 0.65) 60%,
-    rgba(42, 24, 16, 1)
-  );
-  pointer-events:none;
-  z-index: -1;
-}
-
 .hero-inner{
   position: relative;
   /* deliberately no z-index: it would isolate the stacking context and
@@ -1470,9 +1446,6 @@ section[id]{ scroll-margin-top: 88px; }
                       #000 30%, rgba(0,0,0,0.6) 60%, transparent 82%);
 }
 
-/* The ambient background image competes with the photo panel — soften it. */
-.hero .hero-bg{ opacity: 0.35; }
-
 @media (max-width: 860px){
   .hero-inner{
     grid-template-columns: 1fr;
@@ -1483,4 +1456,27 @@ section[id]{ scroll-margin-top: 88px; }
     order: -1;            /* photo first on small screens */
   }
   .hero-figure img{ object-position: 50% 55%; }
+}
+
+/* ---------- Mobile nav: brand row + single scrollable link row ---------- */
+@media (max-width: 700px){
+  .top-nav{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.55rem;
+    padding: 0.6rem 1rem;
+  }
+  .brand{
+    white-space: nowrap;      /* stop "All About Coffee" stacking */
+    font-size: 1.25rem;
+  }
+  .nav-links{
+    flex-wrap: nowrap;        /* one row that scrolls instead of 3 that wrap */
+    overflow-x: auto;
+    gap: 0.35rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .nav-links::-webkit-scrollbar{ display: none; }
+  .nav-links a{ white-space: nowrap; }
 }

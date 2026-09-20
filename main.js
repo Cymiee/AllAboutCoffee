@@ -5,7 +5,6 @@
  * - Smooth anchor scrolling
  * - Drinks gallery modal
  * - Scroll reveal animations
- * - Hero background parallax
  * - Scrollspy nav highlighting
  *
  * Wrapped in an IIFE to avoid polluting the global scope.
@@ -94,31 +93,6 @@
   }
 
   // =========================
-  // 4) Hero background parallax
-  // =========================
-  function initHeroParallax() {
-    const heroBg = qs(".hero-bg");
-    if (!heroBg || prefersReducedMotion) return;
-
-    let ticking = false;
-
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-
-      requestAnimationFrame(() => {
-        const y = window.scrollY || 0;
-        heroBg.style.transform = `translate3d(0, ${y * 0.18}px, 0) scale(1.06)`;
-        ticking = false;
-      });
-    };
-
-    // Run once + on scroll
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-  }
-
-  // =========================
   // 5) Scrollspy + active nav
   // =========================
   function initNavHighlighting() {
@@ -174,6 +148,5 @@
   // =========================
   initSmoothAnchors();
   initScrollReveal();
-  initHeroParallax();
   initNavHighlighting();
 })();
