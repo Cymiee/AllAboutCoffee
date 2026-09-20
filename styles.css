@@ -163,31 +163,8 @@ section[id]{ scroll-margin-top: 88px; }
   max-width: 22ch;
 }
 
-.beans-bg{
-  position: relative;
-  overflow: hidden;
-}
 
-.beans-bg::before{
-  content:"";
-  position: absolute;
-  inset: -20%;
-  background:
-    linear-gradient(
-      rgba(20, 8, 4, 0.78),
-      rgba(28, 12, 6, 0.88)
-    ),
-    url("./assets/coffee-beans-bg.jpg");
-  background-size: cover;
-  background-position: center;
-  transform: translate3d(0,0,0) scale(1.06);
-  z-index: 0;
-}
 
-.beans-bg > .container{
-  position: relative;
-  z-index: 1;
-}
 
 .lead{
   margin: 0;
@@ -1496,4 +1473,9 @@ section[id]{ scroll-margin-top: 88px; }
   }
   .nav-links::-webkit-scrollbar{ display: none; }
   .nav-links a{ white-space: nowrap; }
+}
+
+/* Full-width article body — for guides built from cards rather than prose */
+.article-wide{
+  padding: 3rem 0 4rem;
 }

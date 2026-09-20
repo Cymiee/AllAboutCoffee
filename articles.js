@@ -14,6 +14,14 @@
  */
 const ARTICLES = [
   {
+    slug: "brewing-methods",
+    title: "Six Ways to Brew Coffee",
+    dek: "How each method works, what it tastes like, and how hard it is to get right.",
+    tag: "Brewing",
+    readTime: 9,
+    draft: false,
+  },
+  {
     slug: "healthy-coffee",
     title: "The Healthy Coffee Guide",
     dek: "Which coffees are actually good for you — and which café habits quietly undo the benefits.",
