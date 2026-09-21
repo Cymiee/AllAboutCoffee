@@ -135,12 +135,6 @@ section[id]{ scroll-margin-top: 88px; }
   padding: clamp(3rem, 7vw, 5rem) 0;
 }
 
-.hero-inner{
-  position: relative;
-  /* deliberately no z-index: it would isolate the stacking context and
-     break mix-blend-mode on the hero photo */
-}
-
 .eyebrow{
   display: inline-block;
   font-weight: 700;
@@ -1370,14 +1364,17 @@ section[id]{ scroll-margin-top: 88px; }
 }
 
 /* ==========================================================================
-   HERO — full-bleed photo layer with the text overlaid
-   The photo covers the whole section and is feathered out on every edge,
-   so the bean pile dissolves into the page instead of ending on a hard line.
+   HERO — full-bleed photo on a black stage
+   The source photo was shot on pure #000. Rather than blending it into the
+   brown page (which tinted every pixel warm), the section itself goes black
+   and warms into the page colour at the bottom. No blend mode, no filter —
+   the photo renders at its true contrast and colour.
    ========================================================================== */
 .hero{
   display: flex;
   align-items: center;
   min-height: clamp(560px, 88vh, 900px);
+  background: linear-gradient(to bottom, #000 0%, #000 84%, var(--bg) 100%);
 }
 
 .hero-figure{
@@ -1387,45 +1384,20 @@ section[id]{ scroll-margin-top: 88px; }
   pointer-events: none;
 }
 
-/* Warm light pooling behind the cup so it reads as lit, not pasted on */
-.hero-figure::before{
-  content: "";
-  position: absolute;
-  inset: 8% 0 4% 30%;
-  background: radial-gradient(ellipse at 60% 52%,
-              rgba(196, 123, 58, 0.26) 0%,
-              rgba(196, 123, 58, 0.08) 42%,
-              transparent 72%);
-  filter: blur(40px);
-}
-
 .hero-figure img{
   width: 100%;
   height: 100%;
-  /* contain, not cover: the source is 2:3 portrait, so covering a wide
-     hero would crop ~60% of its height. Fitting to height shows the whole
-     frame — which is the only way the bean pile is not sliced off. */
+  /* contain, not cover: the source is 2:3 portrait, so covering a wide hero
+     would crop ~60% of its height and slice through the bean pile. */
   object-fit: contain;
   object-position: 72% 50%;
   display: block;
-  /* lighten, not screen: screen brightens EVERY pixel, which lifts the
-     blacks but also washes out the cup. lighten takes the per-channel
-     max, so anything darker than the page colour dissolves into it
-     while anything brighter passes through at full strength. */
-  mix-blend-mode: screen;
-  /* Screen blending lifts the shadows to the page colour, which costs
-     contrast. This wins it back: measured 38.3 -> 44.4 std-dev, matching
-     an unblended image, with 0.06% blown highlights and no visible seam. */
-  filter: contrast(1.4) saturate(1.22) brightness(1.08);
-  /* Melt the remaining edges into the page */
-  -webkit-mask-image:
-    linear-gradient(to right, transparent 0%, rgba(0,0,0,0.55) 16%, #000 32%),
-    linear-gradient(to bottom, transparent 0%, #000 12%, #000 70%, transparent 99%);
-  -webkit-mask-composite: source-in;
-  mask-image:
-    linear-gradient(to right, transparent 0%, rgba(0,0,0,0.55) 16%, #000 32%),
-    linear-gradient(to bottom, transparent 0%, #000 12%, #000 70%, transparent 99%);
-  mask-composite: intersect;
+  /* Only the bottom needs feathering, and it fades on exactly the same
+     stop as the section background so the beans dissolve as it warms.
+     The photo's own black edges are invisible against the black stage,
+     so no side masking is needed. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%);
 }
 
 .hero-inner{
@@ -1435,12 +1407,12 @@ section[id]{ scroll-margin-top: 88px; }
 .hero-copy{ max-width: 34rem; }
 
 @media (max-width: 860px){
-  /* Stack rather than overlay: a washed-out photo behind text reads as
-     muddy on a small screen, so the photo gets its own band up top. */
+  /* Stack rather than overlay: the photo gets its own band above the copy. */
   .hero{
     display: block;
     min-height: 0;
     padding: 0 0 clamp(2rem, 6vw, 3rem);
+    background: linear-gradient(to bottom, #000 0%, #000 42%, var(--bg) 62%);
   }
   .hero-figure{
     position: static;
@@ -1448,15 +1420,10 @@ section[id]{ scroll-margin-top: 88px; }
     min-height: 260px;
   }
   .hero-figure img{
-    object-fit: contain;
     object-position: 50% 50%;
-    opacity: 1;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 72%, transparent 99%);
-    -webkit-mask-composite: source-over;
-    mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 72%, transparent 99%);
-    mask-composite: add;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 76%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 0%, #000 76%, transparent 100%);
   }
-  .hero-figure::before{ inset: 6% 12% 10%; }
   .hero-copy{ max-width: none; }
 }
 
