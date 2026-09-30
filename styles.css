@@ -1416,6 +1416,24 @@ section[id]{ scroll-margin-top: 88px; }
   pointer-events: none;
 }
 
+/* "All About" above the word, in the logo's script face. Sized and placed
+   from the word's measured resting geometry, so the lockup holds at any
+   viewport; the fallbacks match the static 16vw word used before JS runs. */
+.portal__kicker{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% - var(--portal-word-top, calc(50% - 5.5vw)) + var(--portal-word-h, 11vw) * 0.1);
+  margin: 0;
+  text-align: center;
+  font-family: "Miniver", cursive;
+  font-size: max(1.15rem, calc(var(--portal-word-h, 11vw) * 0.36));
+  line-height: 1;
+  color: var(--coffee-900);
+  opacity: var(--portal-caption, 1);
+  pointer-events: none;
+}
+
 /* Before measurement lands (and with JS off) the word is just type */
 .portal__fallback{
   position: absolute;

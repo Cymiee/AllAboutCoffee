@@ -140,6 +140,12 @@
     // reach the corners (half the diagonal), plus 15% slack. Zooming past
     // that is invisible and just leaves dead scroll on a flat colour.
     endScale = Math.max(startScale, Math.hypot(W, H) / (focus.radius * 2) * 1.15);
+
+    // Resting size and top edge of the word, for anything placed around it
+    // (the "All About" kicker). At rest the word is centred on H / 2.
+    const wordHeight = bounds.height * startScale;
+    section.style.setProperty("--portal-word-h", `${wordHeight}px`);
+    section.style.setProperty("--portal-word-top", `${H / 2 - wordHeight / 2}px`);
     section.dataset.portalReady = "true";
   }
 
