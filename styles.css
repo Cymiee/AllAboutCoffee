@@ -128,13 +128,6 @@ section[id]{ scroll-margin-top: 88px; }
 }
 
 /* ---------- Hero (parallax) ---------- */
-.portal__content{
-  position: relative;
-  overflow: hidden;
-  border-bottom: 1px solid var(--border);
-  padding: clamp(3rem, 7vw, 5rem) 0;
-}
-
 .eyebrow{
   display: inline-block;
   font-weight: 700;
@@ -145,41 +138,8 @@ section[id]{ scroll-margin-top: 88px; }
   margin: 0 0 0.75rem;
 }
 
-.portal__content h1{
-  font-family: "Fraunces", serif;
-  font-weight: 700;
-  letter-spacing: 0.2px;
-  line-height: 1.1;
-  margin: 0 0 0.85rem;
-  font-size: clamp(2.6rem, 4.2vw, 3.9rem);
-  /* Always cream — hero sits on a dark image in both themes */
-  color: #F0E2CC;
-  max-width: 22ch;
-}
 
 
-
-
-.lead{
-  margin: 0;
-  max-width: 70ch;
-  /* Always readable on the dark hero image */
-  color: rgba(240, 226, 204, 0.72);
-  font-size: 1.08rem;
-}
-
-/* Secondary button inside the hero is always on a dark image */
-.portal__content .button.secondary {
-  color: #F0E2CC;
-  border-color: rgba(240, 226, 204, 0.35);
-}
-
-.cta-row{
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-top: 1.35rem;
-}
 
 .button{
   display: inline-flex;
@@ -1363,70 +1323,6 @@ section[id]{ scroll-margin-top: 88px; }
   .guides-hero{ padding-top: 4rem; }
 }
 
-/* ==========================================================================
-   HERO — full-bleed photo on a black stage
-   The source photo was shot on pure #000. Rather than blending it into the
-   brown page (which tinted every pixel warm), the section itself goes black
-   and warms into the page colour at the bottom. No blend mode, no filter —
-   the photo renders at its true contrast and colour.
-   ========================================================================== */
-.portal__content{
-  display: flex;
-  align-items: center;
-  min-height: 100svh;
-  background: linear-gradient(to bottom, #000 0%, #000 84%, var(--bg) 100%);
-}
-
-.hero-figure{
-  position: absolute;
-  inset: 0;
-  margin: 0;
-  pointer-events: none;
-}
-
-.hero-figure img{
-  width: 100%;
-  height: 100%;
-  /* contain, not cover: the source is 2:3 portrait, so covering a wide hero
-     would crop ~60% of its height and slice through the bean pile. */
-  object-fit: contain;
-  object-position: 72% 50%;
-  display: block;
-  /* Only the bottom needs feathering, and it fades on exactly the same
-     stop as the section background so the beans dissolve as it warms.
-     The photo's own black edges are invisible against the black stage,
-     so no side masking is needed. */
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%);
-          mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%);
-}
-
-.hero-inner{
-  position: relative;   /* sits above the photo layer via DOM order */
-  width: min(var(--container), calc(100% - 2.5rem));
-}
-.hero-copy{ max-width: 34rem; }
-
-@media (max-width: 860px){
-  /* Stack rather than overlay: the photo gets its own band above the copy. */
-  .portal__content{
-    display: block;
-    min-height: 0;
-    padding: 0 0 clamp(2rem, 6vw, 3rem);
-    background: linear-gradient(to bottom, #000 0%, #000 42%, var(--bg) 62%);
-  }
-  .hero-figure{
-    position: static;
-    height: 42vh;
-    min-height: 260px;
-  }
-  .hero-figure img{
-    object-position: 50% 50%;
-    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 76%, transparent 100%);
-            mask-image: linear-gradient(to bottom, #000 0%, #000 76%, transparent 100%);
-  }
-  .hero-copy{ max-width: none; }
-}
-
 /* ---------- Mobile nav: brand row + single scrollable link row ---------- */
 @media (max-width: 700px){
   .top-nav{
@@ -1461,10 +1357,12 @@ section[id]{ scroll-margin-top: 88px; }
    letterforms until the camera flies into the O and it fills the screen.
    ========================================================================== */
 .portal{
-  --portal-length: 2.6;
+  --portal-length: 2.2;
   position: relative;
   isolation: isolate;
   background: #000;
+  /* One screen for the pinned view plus the camera's travel */
+  height: calc((var(--portal-length) + 1) * 100svh);
 }
 
 .portal__pin{
@@ -1481,20 +1379,12 @@ section[id]{ scroll-margin-top: 88px; }
   inset: 0;
   opacity: 0;
   pointer-events: none;
+  /* Gold reads on black (page brown would sit at ~1.3:1). --portal-depth
+     runs 0 -> 1 with the zoom, so by the time the colour fills the screen
+     it has become the page background and the next section follows on. */
+  background: color-mix(in srgb, var(--accent), var(--bg) calc(var(--portal-depth, 0) * 100%));
 }
 .portal[data-portal-ready] .portal__field{ opacity: 1; }
-
-.portal__field-art{
-  position: absolute;
-  inset: -2%;
-  transform: scale(var(--portal-field-scale, 1));
-  transform-origin: center;
-  background:
-    radial-gradient(circle at 28% 18%, rgba(224, 156, 82, 0.55), transparent 46%),
-    radial-gradient(circle at 74% 72%, rgba(126, 62, 24, 0.55), transparent 52%),
-    url("./assets/coffee-beans-bg.jpg") center / cover no-repeat,
-    #3a2213;
-}
 
 .portal__art{
   position: absolute;
@@ -1540,17 +1430,9 @@ section[id]{ scroll-margin-top: 88px; }
 }
 .portal[data-portal-ready] .portal__fallback{ display: none; }
 
-/* The scroll room, and what you land on */
-.portal__content{
-  margin-top: calc((var(--portal-length) - 1) * 100svh);
-  opacity: var(--portal-reveal, 0);
-  pointer-events: none;
-}
-.portal[data-portal-entered="true"] .portal__content{ pointer-events: auto; }
-
-/* No JS, or reduced motion: no camera, just the hero. */
+/* Reduced motion: no camera and no scroll room, just the word. */
 @media (prefers-reduced-motion: reduce){
-  .portal__pin{ position: relative; height: auto; }
-  .portal__field, .portal__caption{ display: none; }
-  .portal__content{ margin-top: 0; opacity: 1; pointer-events: auto; }
+  .portal{ height: auto; }
+  .portal__pin{ position: relative; }
+  .portal__caption{ display: none; }
 }

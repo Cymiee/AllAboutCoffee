@@ -11,9 +11,9 @@
   <script src="quiz.js" defer></script>
   <title>All About Coffee</title>
   <noscript><style>
-    .portal__pin{position:relative;height:auto}
-    .portal__field,.portal__caption{display:none}
-    .portal__content{margin-top:0;opacity:1;pointer-events:auto}
+    .portal{height:auto}
+    .portal__pin{position:relative}
+    .portal__caption{display:none}
   </style></noscript>
 </head>
 <body>
@@ -30,14 +30,14 @@
     </nav>
 </header>
 
-  <section id="top" class="portal" data-portal data-portal-focus="O" data-portal-length="2.6">
+  <section id="top" class="portal" data-portal data-portal-focus="O" data-portal-length="2.2">
+
+    <h1 class="visually-hidden">All About Coffee</h1>
 
     <div class="portal__pin" data-portal-pin>
 
       <!-- Revealed through the letterforms, then fills the screen -->
-      <div class="portal__field" data-portal-field aria-hidden="true">
-        <div class="portal__field-art"></div>
-      </div>
+      <div class="portal__field" data-portal-field aria-hidden="true"></div>
 
       <svg class="portal__art" data-portal-art aria-hidden="true" focusable="false">
         <defs>
@@ -47,35 +47,13 @@
         </defs>
       </svg>
 
-      <!-- Shown before the camera moves; the h1 below is the real heading -->
+      <!-- Shown before the camera moves -->
       <p class="portal__caption" aria-hidden="true">Scroll to step inside &darr;</p>
 
       <!-- Non-JS and reduced-motion readers get the word as plain type -->
       <span class="portal__fallback" aria-hidden="true">COFFEE</span>
     </div>
 
-    <div class="portal__content" data-portal-content>
-      <figure class="hero-figure" aria-hidden="true">
-        <img src="assets/hero/coffee-black-bg.jpg" alt=""
-             width="1333" height="2000" fetchpriority="high" />
-      </figure>
-
-      <div class="container hero-inner">
-        <div class="hero-copy">
-          <p class="eyebrow">Coffee 101</p>
-          <h1>Fall in love with coffee, one sip at a time</h1>
-          <p class="lead">
-            Start with the drinks, dig into the guides, then try the <strong>Brew Your Own</strong>
-            mini game to see what drink your recipe matches.
-          </p>
-
-          <div class="cta-row">
-            <a class="button" href="#quiz">Start learning &darr;</a>
-            <a class="button secondary" href="brew.html">Play Brew Your Own &rarr;</a>
-          </div>
-        </div>
-      </div>
-    </div>
   </section>
 
   <!-- QUIZ -->

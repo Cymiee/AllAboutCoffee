@@ -17,7 +17,6 @@
  *   [data-portal-pin]      the sticky viewport
  *   [data-portal-field]    the layer revealed through the letters
  *   [data-portal-glyph]    the <text> inside the clipPath
- *   [data-portal-content]  what you land on after passing through
  */
 (() => {
   "use strict";
@@ -137,13 +136,16 @@
     if (!ready) { ready = measure(); if (!ready) return; }
 
     startScale = Math.min(W * 0.86 / bounds.width, H * 0.34 / bounds.height);
-    // Grow until the letter's opening covers the viewport's diagonal.
-    endScale = Math.max(startScale, Math.hypot(W, H) / (focus.radius * 1.35));
+    // Stop the moment the letter's ink covers the screen: the disk must
+    // reach the corners (half the diagonal), plus 15% slack. Zooming past
+    // that is invisible and just leaves dead scroll on a flat colour.
+    endScale = Math.max(startScale, Math.hypot(W, H) / (focus.radius * 2) * 1.15);
     section.dataset.portalReady = "true";
   }
 
   function paint(p) {
-    const t = clamp(p / 0.78);
+    // Use nearly all of the travel: nothing follows the zoom any more.
+    const t = clamp(p / 0.95);
     const eased = t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
     const scale = Math.exp(Math.log(startScale) + Math.log(endScale / startScale) * eased);
 
@@ -163,9 +165,8 @@
 
     field.style.clipPath = t >= 1 ? "none" : "url(#portalClip)";
     section.style.setProperty("--portal-caption", String(1 - clamp(p / 0.14)));
-    section.style.setProperty("--portal-reveal", String(clamp((p - 0.74) / 0.16)));
-    section.style.setProperty("--portal-field-scale", String(1 + 0.18 * clamp(p / 0.82)));
-    section.dataset.portalEntered = String(p >= 0.88);
+    // Field colour deepens from gold to the page background as you fly in.
+    section.style.setProperty("--portal-depth", String(eased));
   }
 
   function progress() {
@@ -175,7 +176,7 @@
   function frame() {
     raf = 0;
     if (dirty) { dirty = false; layout(); }
-    if (ready) paint(reduceMotion.matches ? 1 : progress());
+    if (ready) paint(reduceMotion.matches ? 0 : progress());
   }
   const schedule = () => { if (!raf && visible) raf = requestAnimationFrame(frame); };
   const resize = () => { cancelAnimationFrame(raf); raf = 0; dirty = true; frame(); };
