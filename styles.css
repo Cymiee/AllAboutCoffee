@@ -1440,82 +1440,188 @@ section[id]{ scroll-margin-top: 88px; }
 }
 
 /* ==========================================================================
-   HSCROLL — scroll down, move sideways (drinks)
-   Base: a native swipeable row, which is what no-JS and reduced-motion
-   readers get. hscroll.js adds [data-hscroll-active] to pin the section and
-   drive the row from vertical scroll.
+   WHEEL — the drinks as a ring that opens into a turning drum (wheel.js)
+   Base: the ordinary card grid, which is what no-JS and reduced-motion
+   readers get. wheel.js adds [data-wheel-active] to pin the section and
+   switch on the 3D stage.
    ========================================================================== */
-.hscroll__viewport{
-  margin-top: 1.25rem;
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  /* line snapped cards up with the heading, not the viewport edge */
-  scroll-padding-inline: max(1.25rem, calc((100% - var(--container)) / 2));
-  scrollbar-width: none;
-}
-.hscroll__viewport::-webkit-scrollbar{ display: none; }
+.wheel__label,
+.wheel__title,
+.wheel__index{ display: none; }
 
-.drink-grid.hscroll__track{
-  display: flex;
-  gap: 1rem;
-  width: max-content;
-  margin: 0;
-  /* first card starts on the heading's left edge; last ends on its right */
-  padding-inline: max(1.25rem, calc((100% - var(--container)) / 2));
-}
-
-.hscroll .drink-card{
-  flex: 0 0 auto;
-  height: min(60svh, 520px);
-  width: auto;
-  aspect-ratio: 3 / 4;
-  scroll-snap-align: start;
-}
-
-.hscroll__progress{
-  height: 2px;
-  margin-top: 1.25rem;
-  border-radius: 2px;
-  background: var(--border);
-  overflow: hidden;
-}
-.hscroll__progress span{
-  display: block;
-  height: 100%;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-}
-/* The bar only means something while scroll drives the row */
-.hscroll:not([data-hscroll-active]) .hscroll__progress{ display: none; }
-
-/* ---------- Pinned mode ---------- */
-.hscroll[data-hscroll-active]{
+.wheel[data-wheel-active]{
   position: relative;
-  padding-block: 0;           /* height is set by hscroll.js */
+  padding-block: 0;                      /* height is set by wheel.js */
 }
-.hscroll[data-hscroll-active] .hscroll__pin{
+.wheel[data-wheel-active] .wheel__pin{
   position: sticky;
   top: 0;
   height: 100svh;
   box-sizing: border-box;
-  padding-top: var(--hscroll-nav, 0px);   /* clear the sticky header */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding-top: var(--wheel-nav, 0px);    /* clear the sticky header */
   overflow: hidden;
 }
-.hscroll[data-hscroll-active] .hscroll__viewport{
+/* The ring label takes over from the heading; keep the h2 for readers. */
+.wheel[data-wheel-active] .section-head{
+  position: absolute;
+  width: 1px; height: 1px;
   overflow: hidden;
-  scroll-snap-type: none;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
-.hscroll[data-hscroll-active] .hscroll__track{ will-change: transform; }
 
+.wheel[data-wheel-active] .wheel__stage{
+  position: relative;
+  height: 100%;
+  --wheel-cy: 50%;
+}
+.wheel[data-wheel-active] .wheel__drum{
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: var(--wheel-cy);
+  width: 0;
+  height: 0;
+  margin: 0;
+  transform-style: preserve-3d;
+  z-index: 1;
+}
+.wheel[data-wheel-active] .wheel__card{
+  position: absolute;
+  aspect-ratio: auto;                    /* size comes from wheel.js */
+  border-radius: 12px;
+  backface-visibility: hidden;
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.9), 0 0 0 1px var(--border);
+  will-change: transform, opacity;
+}
+.wheel[data-wheel-active] .drink-card__overlay{ display: none; }
+/* Card text moves to the panel beside the drum, but stays in each card for
+   screen readers, which get every drink rather than just the front one. */
+.wheel[data-wheel-active] .drink-card__body{
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  padding: 0;
+}
+
+/* Ring label, centred on the drum */
+.wheel[data-wheel-active] .wheel__label{
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+  position: absolute;
+  left: 50%;
+  top: var(--wheel-cy);
+  width: var(--wheel-ring-inner, 60%);
+  transform: translate(-50%, -50%);
+  margin: 0;
+  text-wrap: balance;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--wheel-label-size, 32px);
+  line-height: 1.05;
+  color: var(--coffee-900);
+  text-align: center;
+  pointer-events: none;
+  z-index: 2;
+}
+.wheel__hint{
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* The front drink's details, beside the drum */
+.wheel[data-wheel-active] .wheel__title{
+  display: block;
+  position: absolute;
+  left: max(1.25rem, calc((100% - var(--container)) / 2));
+  top: var(--wheel-cy);
+  transform: translateY(-50%);
+  max-width: min(var(--wheel-title-max, 300px), 30ch);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+.wheel__tagline{
+  margin: 0 0 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.wheel__name{
+  margin: 0 0 0.75rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.05;
+  color: var(--coffee-900);
+}
+.wheel__desc{
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.wheel__tags{ display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.wheel__tags span{
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(196, 123, 58, 0.4);
+  background: rgba(196, 123, 58, 0.12);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Index down the right */
+.wheel[data-wheel-active] .wheel__index{
+  display: block;
+  position: absolute;
+  right: max(1.25rem, calc((100% - var(--container)) / 2));
+  top: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: right;
+  z-index: 3;
+}
+.wheel__index button{
+  background: none;
+  border: 0;
+  padding: 0.12rem 0;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 180ms ease;
+}
+.wheel__index button:hover{ color: var(--text); }
+.wheel__index button.is-active{ color: var(--accent); font-weight: 700; }
+.wheel__index button:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* Narrow: drum sits higher, details go underneath over a scrim, no index */
 @media (max-width: 700px){
-  .hscroll .drink-card{
-    height: auto;
-    width: min(76vw, 340px);
+  .wheel[data-wheel-active] .wheel__stage{ --wheel-cy: 40%; }
+  .wheel[data-wheel-active] .wheel__title{
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    transform: none;
+    max-width: none;
+    padding: 3rem 1.25rem 1.5rem;
+    background: linear-gradient(to top, var(--bg) 62%, transparent);
   }
+  .wheel__name{ font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .wheel__desc{ font-size: 0.88rem; margin-bottom: 0.75rem; }
+  .wheel[data-wheel-active] .wheel__index{ display: none; }
 }
 
 /* ---------- Falling beans (beans.js) ----------

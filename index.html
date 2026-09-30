@@ -8,7 +8,7 @@
   <script src="main.js" defer></script>
   <script src="beans.js" defer></script>
   <script src="portal.js" defer></script>
-  <script src="hscroll.js" defer></script>
+  <script src="wheel.js" defer></script>
   <script src="home-guides.js" defer></script>
   <script src="quiz.js" defer></script>
   <title>All About Coffee</title>
@@ -125,8 +125,8 @@
     <!-- BEANS -->
 
     <!-- DRINKS -->
-    <section id="drinks" class="section hscroll" data-hscroll>
-      <div class="hscroll__pin" data-hscroll-pin>
+    <section id="drinks" class="section wheel" data-wheel>
+      <div class="wheel__pin" data-wheel-pin>
         <div class="container">
           <div class="section-head reveal">
             <h2>Coffee Drinks</h2>
@@ -134,9 +134,11 @@
           </div>
         </div>
 
-        <div class="hscroll__viewport" data-hscroll-viewport>
-          <div class="drink-grid hscroll__track" data-hscroll-track>
-            <article class="drink-card">
+        <!-- Without JS (or with reduced motion) this is the plain card grid;
+             wheel.js turns it into the ring / drum. -->
+        <div class="wheel__stage" data-wheel-stage>
+          <div class="drink-grid wheel__drum" data-wheel-drum>
+            <article class="drink-card wheel__card" data-wheel-card>
               <img src="assets/drinks/espresso.jpg" alt="Espresso" loading="lazy" />
               <div class="drink-card__overlay"></div>
               <div class="drink-card__body">
@@ -149,7 +151,7 @@
               </div>
             </article>
 
-            <article class="drink-card">
+            <article class="drink-card wheel__card" data-wheel-card>
               <img src="assets/drinks/americano.jpg" alt="Americano" loading="lazy" />
               <div class="drink-card__overlay"></div>
               <div class="drink-card__body">
@@ -162,7 +164,7 @@
               </div>
             </article>
 
-            <article class="drink-card">
+            <article class="drink-card wheel__card" data-wheel-card>
               <img src="assets/drinks/latte.jpg" alt="Latte" loading="lazy" />
               <div class="drink-card__overlay"></div>
               <div class="drink-card__body">
@@ -175,7 +177,7 @@
               </div>
             </article>
 
-            <article class="drink-card">
+            <article class="drink-card wheel__card" data-wheel-card>
               <img src="assets/drinks/cappuccino.jpg" alt="Cappuccino" loading="lazy" />
               <div class="drink-card__overlay"></div>
               <div class="drink-card__body">
@@ -188,7 +190,7 @@
               </div>
             </article>
 
-            <article class="drink-card">
+            <article class="drink-card wheel__card" data-wheel-card>
               <img src="assets/drinks/mocha.jpg" alt="Mocha" loading="lazy" />
               <div class="drink-card__overlay"></div>
               <div class="drink-card__body">
@@ -201,7 +203,7 @@
               </div>
             </article>
 
-            <article class="drink-card">
+            <article class="drink-card wheel__card" data-wheel-card>
               <img src="assets/drinks/macchiato.jpg" alt="Macchiato" loading="lazy" />
               <div class="drink-card__overlay"></div>
               <div class="drink-card__body">
@@ -214,10 +216,13 @@
               </div>
             </article>
           </div>
-        </div>
 
-        <div class="container">
-          <div class="hscroll__progress" aria-hidden="true"><span data-hscroll-bar></span></div>
+          <p class="wheel__label" data-wheel-label aria-hidden="true">
+            Coffee Drinks
+            <span class="wheel__hint">Scroll to turn &darr;</span>
+          </p>
+          <div class="wheel__title" data-wheel-title aria-hidden="true"></div>
+          <ol class="wheel__index" data-wheel-index aria-label="Jump to a drink"></ol>
         </div>
       </div>
     </section>
