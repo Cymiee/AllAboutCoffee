@@ -1517,3 +1517,15 @@ section[id]{ scroll-margin-top: 88px; }
     width: min(76vw, 340px);
   }
 }
+
+/* ---------- Falling beans (beans.js) ----------
+   Fixed behind everything: z-index -1 paints above the page background but
+   below all content, so beans pass behind text and under opaque surfaces. */
+.bean-rain{
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
