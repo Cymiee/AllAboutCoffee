@@ -128,7 +128,7 @@ section[id]{ scroll-margin-top: 88px; }
 }
 
 /* ---------- Hero (parallax) ---------- */
-.hero{
+.portal__content{
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
@@ -145,7 +145,7 @@ section[id]{ scroll-margin-top: 88px; }
   margin: 0 0 0.75rem;
 }
 
-.hero h1{
+.portal__content h1{
   font-family: "Fraunces", serif;
   font-weight: 700;
   letter-spacing: 0.2px;
@@ -169,7 +169,7 @@ section[id]{ scroll-margin-top: 88px; }
 }
 
 /* Secondary button inside the hero is always on a dark image */
-.hero .button.secondary {
+.portal__content .button.secondary {
   color: #F0E2CC;
   border-color: rgba(240, 226, 204, 0.35);
 }
@@ -1370,10 +1370,10 @@ section[id]{ scroll-margin-top: 88px; }
    and warms into the page colour at the bottom. No blend mode, no filter —
    the photo renders at its true contrast and colour.
    ========================================================================== */
-.hero{
+.portal__content{
   display: flex;
   align-items: center;
-  min-height: clamp(560px, 88vh, 900px);
+  min-height: 100svh;
   background: linear-gradient(to bottom, #000 0%, #000 84%, var(--bg) 100%);
 }
 
@@ -1408,7 +1408,7 @@ section[id]{ scroll-margin-top: 88px; }
 
 @media (max-width: 860px){
   /* Stack rather than overlay: the photo gets its own band above the copy. */
-  .hero{
+  .portal__content{
     display: block;
     min-height: 0;
     padding: 0 0 clamp(2rem, 6vw, 3rem);
@@ -1453,4 +1453,104 @@ section[id]{ scroll-margin-top: 88px; }
 /* Full-width article body — for guides built from cards rather than prose */
 .article-wide{
   padding: 3rem 0 4rem;
+}
+
+/* ==========================================================================
+   PORTAL — scroll-driven camera through the word COFFEE
+   The word is an SVG clipPath; the field behind it shows only through the
+   letterforms until the camera flies into the O and it fills the screen.
+   ========================================================================== */
+.portal{
+  --portal-length: 2.6;
+  position: relative;
+  isolation: isolate;
+  background: #000;
+}
+
+.portal__pin{
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: clip;
+  isolation: isolate;
+}
+
+/* What you see through the letters, and then fly into */
+.portal__field{
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.portal[data-portal-ready] .portal__field{ opacity: 1; }
+
+.portal__field-art{
+  position: absolute;
+  inset: -2%;
+  transform: scale(var(--portal-field-scale, 1));
+  transform-origin: center;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(224, 156, 82, 0.55), transparent 46%),
+    radial-gradient(circle at 74% 72%, rgba(126, 62, 24, 0.55), transparent 52%),
+    url("./assets/coffee-beans-bg.jpg") center / cover no-repeat,
+    #3a2213;
+}
+
+.portal__art{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.portal__art text{
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 100px;
+  font-kerning: none;
+  font-variant-ligatures: none;
+  letter-spacing: 0;
+}
+
+.portal__caption{
+  position: absolute;
+  inset: auto 0 7%;
+  margin: 0;
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: var(--portal-caption, 1);
+  pointer-events: none;
+}
+
+/* Before measurement lands (and with JS off) the word is just type */
+.portal__fallback{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16vw;
+  line-height: 1;
+  color: var(--accent);
+}
+.portal[data-portal-ready] .portal__fallback{ display: none; }
+
+/* The scroll room, and what you land on */
+.portal__content{
+  margin-top: calc((var(--portal-length) - 1) * 100svh);
+  opacity: var(--portal-reveal, 0);
+  pointer-events: none;
+}
+.portal[data-portal-entered="true"] .portal__content{ pointer-events: auto; }
+
+/* No JS, or reduced motion: no camera, just the hero. */
+@media (prefers-reduced-motion: reduce){
+  .portal__pin{ position: relative; height: auto; }
+  .portal__field, .portal__caption{ display: none; }
+  .portal__content{ margin-top: 0; opacity: 1; pointer-events: auto; }
 }

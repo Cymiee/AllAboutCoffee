@@ -6,9 +6,15 @@
   <link rel="stylesheet" href="styles.css" />
   <script src="articles.js" defer></script>
   <script src="main.js" defer></script>
+  <script src="portal.js" defer></script>
   <script src="home-guides.js" defer></script>
   <script src="quiz.js" defer></script>
   <title>All About Coffee</title>
+  <noscript><style>
+    .portal__pin{position:relative;height:auto}
+    .portal__field,.portal__caption{display:none}
+    .portal__content{margin-top:0;opacity:1;pointer-events:auto}
+  </style></noscript>
 </head>
 <body>
 <header class="top-nav">
@@ -24,24 +30,49 @@
     </nav>
 </header>
 
-  <section id="top" class="hero">
-    <figure class="hero-figure" aria-hidden="true">
-      <img src="assets/hero/coffee-black-bg.jpg" alt=""
-           width="1333" height="2000" fetchpriority="high" />
-    </figure>
+  <section id="top" class="portal" data-portal data-portal-focus="O" data-portal-length="2.6">
 
-    <div class="container hero-inner">
-      <div class="hero-copy reveal">
-        <p class="eyebrow">Coffee 101</p>
-        <h1>Fall in love with coffee, one sip at a time</h1>
-        <p class="lead">
-          Start with the drinks, dig into the guides, then try the <strong>Brew Your Own</strong>
-          mini game to see what drink your recipe matches.
-        </p>
+    <div class="portal__pin" data-portal-pin>
 
-        <div class="cta-row">
-          <a class="button" href="#quiz">Start learning ↓</a>
-          <a class="button secondary" href="brew.html">Play Brew Your Own →</a>
+      <!-- Revealed through the letterforms, then fills the screen -->
+      <div class="portal__field" data-portal-field aria-hidden="true">
+        <div class="portal__field-art"></div>
+      </div>
+
+      <svg class="portal__art" data-portal-art aria-hidden="true" focusable="false">
+        <defs>
+          <clipPath id="portalClip" clipPathUnits="userSpaceOnUse">
+            <text data-portal-glyph x="0" y="0">COFFEE</text>
+          </clipPath>
+        </defs>
+      </svg>
+
+      <!-- Shown before the camera moves; the h1 below is the real heading -->
+      <p class="portal__caption" aria-hidden="true">Scroll to step inside &darr;</p>
+
+      <!-- Non-JS and reduced-motion readers get the word as plain type -->
+      <span class="portal__fallback" aria-hidden="true">COFFEE</span>
+    </div>
+
+    <div class="portal__content" data-portal-content>
+      <figure class="hero-figure" aria-hidden="true">
+        <img src="assets/hero/coffee-black-bg.jpg" alt=""
+             width="1333" height="2000" fetchpriority="high" />
+      </figure>
+
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Coffee 101</p>
+          <h1>Fall in love with coffee, one sip at a time</h1>
+          <p class="lead">
+            Start with the drinks, dig into the guides, then try the <strong>Brew Your Own</strong>
+            mini game to see what drink your recipe matches.
+          </p>
+
+          <div class="cta-row">
+            <a class="button" href="#quiz">Start learning &darr;</a>
+            <a class="button secondary" href="brew.html">Play Brew Your Own &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
