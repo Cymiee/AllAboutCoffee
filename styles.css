@@ -1440,6 +1440,162 @@ section[id]{ scroll-margin-top: 88px; }
 }
 
 /* ==========================================================================
+   HSCROLL — scroll down, move sideways (hscroll.js)
+   Base: a native swipeable row, which is what no-JS and reduced-motion
+   readers get. hscroll.js adds [data-hscroll-active] to pin the section and
+   drive the row from vertical scroll.
+   ========================================================================== */
+.hscroll__viewport{
+  margin-top: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  /* snap cards to the heading's edge, not the viewport's */
+  scroll-padding-inline: max(1.25rem, calc((100% - var(--container)) / 2));
+  scrollbar-width: none;
+}
+.hscroll__viewport::-webkit-scrollbar{ display: none; }
+
+.hscroll__track{
+  display: flex;
+  width: max-content;
+  margin: 0;
+  list-style: none;
+  /* first item starts on the heading's left edge; last ends on its right */
+  padding-inline: max(1.25rem, calc((100% - var(--container)) / 2));
+}
+
+.hscroll[data-hscroll-active]{
+  position: relative;
+  padding-block: 0;                      /* height is set by hscroll.js */
+}
+.hscroll[data-hscroll-active] .hscroll__pin{
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  box-sizing: border-box;
+  padding-top: var(--hscroll-nav, 0px);  /* clear the sticky header */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.hscroll[data-hscroll-active] .hscroll__viewport{
+  overflow: hidden;
+  scroll-snap-type: none;
+}
+.hscroll[data-hscroll-active] .hscroll__track{ will-change: transform; }
+
+/* ---------- JOURNEY — the seed-to-cup timeline ---------- */
+.journey__track{
+  position: relative;
+  gap: 1.5rem;
+  padding-top: 2.25rem;                  /* room for the axis and dots */
+  padding-bottom: 0.5rem;
+}
+/* The axis: a hairline from the first dot to the last, filling with gold */
+.journey__track::before,
+.journey__track::after{
+  content: "";
+  position: absolute;
+  top: calc(0.75rem - 1px);
+  left: calc(var(--axis-start, 0px) + 7px);
+  height: 2px;
+  border-radius: 2px;
+}
+.journey__track::before{
+  width: var(--axis-len, 0px);
+  background: var(--border);
+}
+.journey__track::after{
+  width: var(--axis-fill, 0px);
+  background: linear-gradient(90deg, rgba(196, 123, 58, 0.55), var(--accent));
+  box-shadow: 0 0 12px rgba(196, 123, 58, 0.45);
+}
+
+.journey__step{
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(240px, 24vw, 290px);
+  scroll-snap-align: start;
+}
+.journey__dot{
+  position: absolute;
+  top: calc(-2.25rem + 0.75rem - 7px);
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  transition: background 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+  z-index: 1;
+}
+.journey__step.is-reached .journey__dot{
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(196, 123, 58, 0.18), 0 0 14px rgba(196, 123, 58, 0.55);
+}
+
+.journey__card{
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1.35rem 1.35rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  opacity: 0.55;
+  transition: opacity 400ms ease, border-color 400ms ease, transform 400ms ease;
+}
+.journey__step.is-reached .journey__card{
+  opacity: 1;
+  border-color: rgba(196, 123, 58, 0.45);
+}
+.journey__top{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+.journey__icon{
+  width: 44px;
+  height: 44px;
+  color: var(--accent);
+}
+.journey__num{
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.journey__card h3{
+  margin: 0 0 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--coffee-900);
+}
+.journey__card p{
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.journey__fact{
+  display: inline-block;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(196, 123, 58, 0.4);
+  background: rgba(196, 123, 58, 0.12);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--coffee-700);
+}
+
+@media (max-width: 700px){
+  .journey__step{ width: min(78vw, 320px); }
+}
+
+/* ==========================================================================
    WHEEL — the drinks as a ring that opens into a turning drum (wheel.js)
    Base: the ordinary card grid, which is what no-JS and reduced-motion
    readers get. wheel.js adds [data-wheel-active] to pin the section and

@@ -8,6 +8,7 @@
   <script src="main.js" defer></script>
   <script src="beans.js" defer></script>
   <script src="portal.js" defer></script>
+  <script src="hscroll.js" defer></script>
   <script src="wheel.js" defer></script>
   <script src="home-guides.js" defer></script>
   <script src="quiz.js" defer></script>
@@ -125,6 +126,130 @@
     <!-- BEANS -->
 
     <!-- DRINKS -->
+    <section id="journey" class="section hscroll journey" data-hscroll>
+      <div class="hscroll__pin" data-hscroll-pin>
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>From Seed to Cup</h2>
+            <p>The long road a coffee bean travels before it reaches your mug.</p>
+          </div>
+        </div>
+
+        <div class="hscroll__viewport" data-hscroll-viewport>
+          <ol class="hscroll__track journey__track" data-hscroll-track>
+            <li class="journey__step" data-hscroll-step>
+              <span class="journey__dot" aria-hidden="true"></span>
+              <div class="journey__card">
+                <div class="journey__top">
+                  <svg class="journey__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="24" cy="24" rx="11" ry="15" transform="rotate(-28 24 24)"/><path d="M17.5 32c4-4 1-10 5-14s4-6 8-4"/></svg>
+                  <span class="journey__num" aria-hidden="true">01</span>
+                </div>
+                <h3>Seed</h3>
+                <p>A coffee “bean” is really the seed of a cherry. Planted in shaded nurseries, it takes about two months to sprout.</p>
+                <span class="journey__fact">~2 months to sprout</span>
+              </div>
+            </li>
+            <li class="journey__step" data-hscroll-step>
+              <span class="journey__dot" aria-hidden="true"></span>
+              <div class="journey__card">
+                <div class="journey__top">
+                  <svg class="journey__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 43V25"/><path d="M24 33l-7-6M24 29l7-6"/><circle cx="24" cy="16" r="10"/></svg>
+                  <span class="journey__num" aria-hidden="true">02</span>
+                </div>
+                <h3>Tree</h3>
+                <p>Seedlings are moved out to the farm, often high up in the tropics, and grow for years before they bear any fruit.</p>
+                <span class="journey__fact">3–4 years to first fruit</span>
+              </div>
+            </li>
+            <li class="journey__step" data-hscroll-step>
+              <span class="journey__dot" aria-hidden="true"></span>
+              <div class="journey__card">
+                <div class="journey__top">
+                  <svg class="journey__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="17" cy="33" r="7"/><circle cx="32" cy="31" r="7"/><path d="M17 26c1-8 5-14 9-17M32 24c0-7-2-12-6-15"/><path d="M26 9c4-3 9-3 12 0-4 3-9 3-12 0z"/></svg>
+                  <span class="journey__num" aria-hidden="true">03</span>
+                </div>
+                <h3>Cherry</h3>
+                <p>White, jasmine-scented blossoms turn into cherries that slowly ripen from green to deep red.</p>
+                <span class="journey__fact">~8 months to ripen</span>
+              </div>
+            </li>
+            <li class="journey__step" data-hscroll-step>
+              <span class="journey__dot" aria-hidden="true"></span>
+              <div class="journey__card">
+                <div class="journey__top">
+                  <svg class="journey__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 22h32l-4 18H12z"/><path d="M15 22c0-7 4-12 9-12s9 5 9 12"/><circle cx="19" cy="30" r="2.5"/><circle cx="27" cy="31" r="2.5"/><circle cx="23" cy="35" r="2.5"/></svg>
+                  <span class="journey__num" aria-hidden="true">04</span>
+                </div>
+                <h3>Harvest</h3>
+                <p>Ripe cherries are picked — often by hand, in several passes, because they don’t all ripen at once.</p>
+                <span class="journey__fact">picked as they ripen</span>
+              </div>
+            </li>
+            <li class="journey__step" data-hscroll-step>
+              <span class="journey__dot" aria-hidden="true"></span>
+              <div class="journey__card">
+                <div class="journey__top">
+                  <svg class="journey__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 6c6 8 10 13 10 19a10 10 0 0 1-20 0c0-6 4-11 10-19z"/><path d="M6 41c4-3 8-3 12 0s8 3 12 0 8-3 12 0"/></svg>
+                  <span class="journey__num" aria-hidden="true">05</span>
+                </div>
+                <h3>Processing</h3>
+                <p>The fruit has to come off the seed. Washed, natural and honey methods each leave their own mark on the flavour.</p>
+                <span class="journey__fact">washed · natural · honey</span>
+              </div>
+            </li>
+            <li class="journey__step" data-hscroll-step>
+              <span class="journey__dot" aria-hidden="true"></span>
+              <div class="journey__card">
+                <div class="journey__top">
+                  <svg class="journey__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="15" r="6"/><path d="M24 3v3M24 24v3M12 15H9M39 15h-3M15.5 6.5l2 2M30.5 21.5l2 2M15.5 23.5l2-2M30.5 8.5l2-2"/><path d="M6 36h36M10 36v6M38 36v6"/><circle cx="15" cy="33" r="1.5"/><circle cx="22" cy="33" r="1.5"/><circle cx="29" cy="33" r="1.5"/><circle cx="35" cy="33" r="1.5"/></svg>
+                  <span class="journey__num" aria-hidden="true">06</span>
+                </div>
+                <h3>Dry &amp; mill</h3>
+                <p>Beans are dried in the sun, then hulled out of their papery parchment and sorted. Now they’re “green coffee”, ready to ship.</p>
+                <span class="journey__fact">dried to ~11% moisture</span>
+              </div>
+            </li>
+            <li class="journey__step" data-hscroll-step>
+              <span class="journey__dot" aria-hidden="true"></span>
+              <div class="journey__card">
+                <div class="journey__top">
+                  <svg class="journey__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 5c2 7 10 11 10 21a10 10 0 0 1-20 0c0-5 3-8 5-11 1 4 3 6 5 6-1-6 0-11 0-16z"/><path d="M24 43v-4"/></svg>
+                  <span class="journey__num" aria-hidden="true">07</span>
+                </div>
+                <h3>Roasting</h3>
+                <p>Heat turns the green bean brown: sugars caramelise, aromas develop, and the beans audibly crack.</p>
+                <span class="journey__fact">first crack ~196°C</span>
+              </div>
+            </li>
+            <li class="journey__step" data-hscroll-step>
+              <span class="journey__dot" aria-hidden="true"></span>
+              <div class="journey__card">
+                <div class="journey__top">
+                  <svg class="journey__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 20h20l-3 22H17z"/><path d="M12 20h24"/><path d="M24 20v-6"/><path d="M24 14h13"/><circle cx="37" cy="14" r="2.5"/><path d="M20 30h8"/></svg>
+                  <span class="journey__num" aria-hidden="true">08</span>
+                </div>
+                <h3>Grinding</h3>
+                <p>Grind size is matched to the brew — coarse for a French press, fine for espresso. Grind just before brewing.</p>
+                <span class="journey__fact">coarse → fine</span>
+              </div>
+            </li>
+            <li class="journey__step" data-hscroll-step>
+              <span class="journey__dot" aria-hidden="true"></span>
+              <div class="journey__card">
+                <div class="journey__top">
+                  <svg class="journey__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21h26v9a11 11 0 0 1-11 11h-4A11 11 0 0 1 9 30z"/><path d="M35 24h3a4 4 0 0 1 0 8h-3"/><path d="M16 15c-2-3 2-5 0-8M23 15c-2-3 2-5 0-8M30 15c-2-3 2-5 0-8"/></svg>
+                  <span class="journey__num" aria-hidden="true">09</span>
+                </div>
+                <h3>Brewing</h3>
+                <p>Hot water pulls the flavour out of the grounds, and months of work end up in the cup in your hands.</p>
+                <span class="journey__fact">your cup</span>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
     <section id="drinks" class="section wheel" data-wheel>
       <div class="wheel__pin" data-wheel-pin>
         <div class="container">
