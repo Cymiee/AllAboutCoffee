@@ -7,6 +7,7 @@
   <script src="articles.js" defer></script>
   <script src="main.js" defer></script>
   <script src="portal.js" defer></script>
+  <script src="hscroll.js" defer></script>
   <script src="home-guides.js" defer></script>
   <script src="quiz.js" defer></script>
   <title>All About Coffee</title>
@@ -123,91 +124,99 @@
     <!-- BEANS -->
 
     <!-- DRINKS -->
-    <section id="drinks" class="section">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2>Coffee Drinks</h2>
-          <p>Six classics — what they are and what sets them apart.</p>
+    <section id="drinks" class="section hscroll" data-hscroll>
+      <div class="hscroll__pin" data-hscroll-pin>
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>Coffee Drinks</h2>
+            <p>Six classics — what they are and what sets them apart.</p>
+          </div>
         </div>
 
-        <div class="drink-grid">
-          <article class="drink-card reveal">
-            <img src="assets/drinks/espresso.jpg" alt="Espresso" loading="lazy" />
-            <div class="drink-card__overlay"></div>
-            <div class="drink-card__body">
-              <p class="drink-card__tagline">Pure. Intense. Essential.</p>
-              <h3 class="drink-card__name">Espresso</h3>
-              <p class="drink-card__desc">Hot water forced through finely-ground coffee under pressure. The foundation every café drink is built on.</p>
-              <div class="drink-card__tags">
-                <span>~2 oz</span><span>Strongest</span><span>No milk</span>
+        <div class="hscroll__viewport" data-hscroll-viewport>
+          <div class="drink-grid hscroll__track" data-hscroll-track>
+            <article class="drink-card">
+              <img src="assets/drinks/espresso.jpg" alt="Espresso" loading="lazy" />
+              <div class="drink-card__overlay"></div>
+              <div class="drink-card__body">
+                <p class="drink-card__tagline">Pure. Intense. Essential.</p>
+                <h3 class="drink-card__name">Espresso</h3>
+                <p class="drink-card__desc">Hot water forced through finely-ground coffee under pressure. The foundation every café drink is built on.</p>
+                <div class="drink-card__tags">
+                  <span>~2 oz</span><span>Strongest</span><span>No milk</span>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="drink-card reveal">
-            <img src="assets/drinks/americano.jpg" alt="Americano" loading="lazy" />
-            <div class="drink-card__overlay"></div>
-            <div class="drink-card__body">
-              <p class="drink-card__tagline">Espresso, opened up.</p>
-              <h3 class="drink-card__name">Americano</h3>
-              <p class="drink-card__desc">Espresso diluted with hot water — lighter body, same bold character and depth.</p>
-              <div class="drink-card__tags">
-                <span>~8 oz</span><span>Medium</span><span>No milk</span>
+            <article class="drink-card">
+              <img src="assets/drinks/americano.jpg" alt="Americano" loading="lazy" />
+              <div class="drink-card__overlay"></div>
+              <div class="drink-card__body">
+                <p class="drink-card__tagline">Espresso, opened up.</p>
+                <h3 class="drink-card__name">Americano</h3>
+                <p class="drink-card__desc">Espresso diluted with hot water — lighter body, same bold character and depth.</p>
+                <div class="drink-card__tags">
+                  <span>~8 oz</span><span>Medium</span><span>No milk</span>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="drink-card reveal">
-            <img src="assets/drinks/latte.jpg" alt="Latte" loading="lazy" />
-            <div class="drink-card__overlay"></div>
-            <div class="drink-card__body">
-              <p class="drink-card__tagline">Silky. Mellow. Familiar.</p>
-              <h3 class="drink-card__name">Latte</h3>
-              <p class="drink-card__desc">Espresso with generous steamed milk and a thin foam cap. Smooth and approachable.</p>
-              <div class="drink-card__tags">
-                <span>~12 oz</span><span>Mild</span><span>Lots of milk</span>
+            <article class="drink-card">
+              <img src="assets/drinks/latte.jpg" alt="Latte" loading="lazy" />
+              <div class="drink-card__overlay"></div>
+              <div class="drink-card__body">
+                <p class="drink-card__tagline">Silky. Mellow. Familiar.</p>
+                <h3 class="drink-card__name">Latte</h3>
+                <p class="drink-card__desc">Espresso with generous steamed milk and a thin foam cap. Smooth and approachable.</p>
+                <div class="drink-card__tags">
+                  <span>~12 oz</span><span>Mild</span><span>Lots of milk</span>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="drink-card reveal">
-            <img src="assets/drinks/cappuccino.jpg" alt="Cappuccino" loading="lazy" />
-            <div class="drink-card__overlay"></div>
-            <div class="drink-card__body">
-              <p class="drink-card__tagline">Foam, flavor, balance.</p>
-              <h3 class="drink-card__name">Cappuccino</h3>
-              <p class="drink-card__desc">Equal thirds espresso, steamed milk, and thick foam. Bolder and airier than a latte.</p>
-              <div class="drink-card__tags">
-                <span>~6 oz</span><span>Medium</span><span>Foamy</span>
+            <article class="drink-card">
+              <img src="assets/drinks/cappuccino.jpg" alt="Cappuccino" loading="lazy" />
+              <div class="drink-card__overlay"></div>
+              <div class="drink-card__body">
+                <p class="drink-card__tagline">Foam, flavor, balance.</p>
+                <h3 class="drink-card__name">Cappuccino</h3>
+                <p class="drink-card__desc">Equal thirds espresso, steamed milk, and thick foam. Bolder and airier than a latte.</p>
+                <div class="drink-card__tags">
+                  <span>~6 oz</span><span>Medium</span><span>Foamy</span>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="drink-card reveal">
-            <img src="assets/drinks/mocha.jpg" alt="Mocha" loading="lazy" />
-            <div class="drink-card__overlay"></div>
-            <div class="drink-card__body">
-              <p class="drink-card__tagline">Coffee meets chocolate.</p>
-              <h3 class="drink-card__name">Mocha</h3>
-              <p class="drink-card__desc">Espresso and steamed milk enriched with chocolate syrup. Dessert in a cup.</p>
-              <div class="drink-card__tags">
-                <span>~12 oz</span><span>Sweet</span><span>Chocolate</span>
+            <article class="drink-card">
+              <img src="assets/drinks/mocha.jpg" alt="Mocha" loading="lazy" />
+              <div class="drink-card__overlay"></div>
+              <div class="drink-card__body">
+                <p class="drink-card__tagline">Coffee meets chocolate.</p>
+                <h3 class="drink-card__name">Mocha</h3>
+                <p class="drink-card__desc">Espresso and steamed milk enriched with chocolate syrup. Dessert in a cup.</p>
+                <div class="drink-card__tags">
+                  <span>~12 oz</span><span>Sweet</span><span>Chocolate</span>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="drink-card reveal">
-            <img src="assets/drinks/macchiato.jpg" alt="Macchiato" loading="lazy" />
-            <div class="drink-card__overlay"></div>
-            <div class="drink-card__body">
-              <p class="drink-card__tagline">Espresso, just marked.</p>
-              <h3 class="drink-card__name">Macchiato</h3>
-              <p class="drink-card__desc">A shot of espresso with just a small dollop of foam. Bold and unapologetically strong.</p>
-              <div class="drink-card__tags">
-                <span>~3 oz</span><span>Strong</span><span>Little milk</span>
+            <article class="drink-card">
+              <img src="assets/drinks/macchiato.jpg" alt="Macchiato" loading="lazy" />
+              <div class="drink-card__overlay"></div>
+              <div class="drink-card__body">
+                <p class="drink-card__tagline">Espresso, just marked.</p>
+                <h3 class="drink-card__name">Macchiato</h3>
+                <p class="drink-card__desc">A shot of espresso with just a small dollop of foam. Bold and unapologetically strong.</p>
+                <div class="drink-card__tags">
+                  <span>~3 oz</span><span>Strong</span><span>Little milk</span>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="hscroll__progress" aria-hidden="true"><span data-hscroll-bar></span></div>
         </div>
       </div>
     </section>

@@ -719,22 +719,6 @@ section[id]{ scroll-margin-top: 88px; }
   overflow: hidden;
   aspect-ratio: 3 / 4;
   box-shadow: var(--shadow);
-  /* stagger the reveal per card */
-  --stagger: 0;
-}
-
-.drink-card:nth-child(1) { --stagger: 0; }
-.drink-card:nth-child(2) { --stagger: 1; }
-.drink-card:nth-child(3) { --stagger: 2; }
-.drink-card:nth-child(4) { --stagger: 3; }
-.drink-card:nth-child(5) { --stagger: 4; }
-.drink-card:nth-child(6) { --stagger: 5; }
-
-/* Override the generic .reveal transition to add stagger */
-.drink-card.reveal {
-  transition:
-    opacity  500ms ease calc(var(--stagger) * 70ms),
-    transform 500ms ease calc(var(--stagger) * 70ms);
 }
 
 /* Photo fills the entire card */
@@ -1453,4 +1437,83 @@ section[id]{ scroll-margin-top: 88px; }
   .portal{ height: auto; }
   .portal__pin{ position: relative; }
   .portal__caption{ display: none; }
+}
+
+/* ==========================================================================
+   HSCROLL — scroll down, move sideways (drinks)
+   Base: a native swipeable row, which is what no-JS and reduced-motion
+   readers get. hscroll.js adds [data-hscroll-active] to pin the section and
+   drive the row from vertical scroll.
+   ========================================================================== */
+.hscroll__viewport{
+  margin-top: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  /* line snapped cards up with the heading, not the viewport edge */
+  scroll-padding-inline: max(1.25rem, calc((100% - var(--container)) / 2));
+  scrollbar-width: none;
+}
+.hscroll__viewport::-webkit-scrollbar{ display: none; }
+
+.drink-grid.hscroll__track{
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  margin: 0;
+  /* first card starts on the heading's left edge; last ends on its right */
+  padding-inline: max(1.25rem, calc((100% - var(--container)) / 2));
+}
+
+.hscroll .drink-card{
+  flex: 0 0 auto;
+  height: min(60svh, 520px);
+  width: auto;
+  aspect-ratio: 3 / 4;
+  scroll-snap-align: start;
+}
+
+.hscroll__progress{
+  height: 2px;
+  margin-top: 1.25rem;
+  border-radius: 2px;
+  background: var(--border);
+  overflow: hidden;
+}
+.hscroll__progress span{
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+/* The bar only means something while scroll drives the row */
+.hscroll:not([data-hscroll-active]) .hscroll__progress{ display: none; }
+
+/* ---------- Pinned mode ---------- */
+.hscroll[data-hscroll-active]{
+  position: relative;
+  padding-block: 0;           /* height is set by hscroll.js */
+}
+.hscroll[data-hscroll-active] .hscroll__pin{
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  box-sizing: border-box;
+  padding-top: var(--hscroll-nav, 0px);   /* clear the sticky header */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.hscroll[data-hscroll-active] .hscroll__viewport{
+  overflow: hidden;
+  scroll-snap-type: none;
+}
+.hscroll[data-hscroll-active] .hscroll__track{ will-change: transform; }
+
+@media (max-width: 700px){
+  .hscroll .drink-card{
+    height: auto;
+    width: min(76vw, 340px);
+  }
 }
