@@ -4,10 +4,10 @@
   --font-heading: "Comfortaa", cursive;
   --font-body: "Nunito", system-ui, sans-serif;
 
-  /* ── Unified coffee-brown theme ── */
-  --bg: #2A1810;
-  --surface: #38211A;
-  --surface-2: #46291E;
+  /* ── Black & gold theme (from the landing portal) ── */
+  --bg: #0A0806;
+  --surface: #15110D;
+  --surface-2: #1D1812;
   --border: rgba(196, 123, 58, 0.22);
 
   --tint: rgba(196, 123, 58, 0.08);
@@ -19,7 +19,7 @@
   --muted: rgba(240, 228, 206, 0.58);
 
   --coffee-900: #F5ECD8;
-  --coffee-700: #D4906A;
+  --coffee-700: #D9A35F;   /* light gold for links/nav (was peach-brown) */
 
   --accent: #C47B3A;
 
@@ -60,7 +60,7 @@ section[id]{ scroll-margin-top: 88px; }
   top: 0;
   z-index: 50;
 
-  background: rgba(26, 12, 6, 0.90);
+  background: rgba(10, 8, 6, 0.86);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -282,9 +282,9 @@ section[id]{ scroll-margin-top: 88px; }
 .brew-hero {
   background:
     linear-gradient(135deg,
-      rgba(22, 10, 4, 0.97) 0%,
-      rgba(55, 30, 16, 0.94) 55%,
-      rgba(38, 22, 12, 0.96) 100%
+      rgba(0, 0, 0, 0.94) 0%,
+      rgba(14, 11, 8, 0.90) 55%,
+      rgba(0, 0, 0, 0.94) 100%
     ),
     url('./assets/coffee-beans-bg.jpg');
   background-size: cover;
@@ -1028,7 +1028,7 @@ section[id]{ scroll-margin-top: 88px; }
 .guide-filter.is-active{
   background: var(--accent);
   border-color: var(--accent);
-  color: #2A1810;
+  color: var(--bg);
   font-weight: 700;
 }
 .guide-search input{
